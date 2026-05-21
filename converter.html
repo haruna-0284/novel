@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Body Converter - Fiction Shelf</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f5f5f0;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: #000;
+    }
+    .container { max-width: 820px; margin: 0 auto; }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      font-size: 0.82rem;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    code {
+      font-family: monospace;
+      background: #e8e8e0;
+      padding: 0.1em 0.4em;
+      font-size: 0.9em;
+    }
+
+    .card {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 0.75rem;
+    }
+
+    /* 使い方 */
+    .step { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.4rem; }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #aaa;
+      flex-shrink: 0;
+      width: 1.4rem;
+    }
+    .step-text { font-size: 0.82rem; color: #444; line-height: 1.6; }
+
+    /* テキストエリア */
+    textarea {
+      width: 100%;
+      border: 2px solid #000;
+      padding: 0.75rem;
+      font-family: 'Noto Serif JP', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.9;
+      resize: vertical;
+      outline: none;
+      background: #fff;
+      color: #000;
+      border-radius: 0;
+    }
+    textarea:focus { background: #fafaf7; }
+    .input-area { min-height: 220px; }
+    .output-area {
+      min-height: 80px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      background: #f5f5f0;
+      word-break: break-all;
+    }
+
+    /* 統計 */
+    .stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid #ddd;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 0.1rem; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.65rem; color: #888; letter-spacing: 0.05em; }
+
+    /* ボタン */
+    .btn-row { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+    .btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border: 2px solid #000;
+      padding: 0.45rem 1.1rem;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      border-radius: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: background 0.15s;
+      line-height: 1.4;
+    }
+    .btn:hover { background: #333; }
+    .btn.secondary { background: #fff; color: #000; }
+    .btn.secondary:hover { background: #e8e8e0; }
+    .btn.success { background: #1a6e1a; border-color: #1a6e1a; color: #fff; }
+
+    .output-info {
+      font-size: 0.72rem;
+      color: #666;
+      margin-top: 0.6rem;
+      line-height: 1.6;
+    }
+
+    /* 戻るリンク */
+    .back-link {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #999;
+      margin-bottom: 1.5rem;
+    }
+    .back-link:hover { border-bottom-color: #000; }
+
+    @media (max-width: 600px) {
+      body { padding: 1.25rem 1rem; }
+      .stats { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← 一覧へ戻る</a>
+    <h1>Body Converter</h1>
+    <p class="subtitle">
+      小説本文を貼り付けると、<code>data/works/wXXX.json</code> の
+      <code>"body"</code> フィールドに設定できる形式に変換します。
+    </p>
+
+    <div class="card">
+      <div class="card-title">使い方</div>
+      <div class="step"><span class="step-num">01</span><span class="step-text">下の入力欄に本文をそのまま貼り付ける（改行はそのままでOK）</span></div>
+      <div class="step"><span class="step-num">02</span><span class="step-text">「変換する」を押す</span></div>
+      <div class="step"><span class="step-num">03</span><span class="step-text">出力されたテキストをコピーして、JSONの <code>"body": "..."</code> の値部分に貼り付ける</span></div>
+      <div class="step"><span class="step-num">04</span><span class="step-text">空行（1行まるごと空白）が段落の区切りになります</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">① 本文を入力</div>
+      <textarea
+        class="input-area"
+        id="input"
+        placeholder="ここに本文を貼り付けてください。
+
+空行が段落の区切りになります。
+
+空行がない場合は改行をそのまま維持します。"
+      ></textarea>
+      <div class="stats" id="stats" style="display:none">
+        <div class="stat-item">
+          <div class="stat-num" id="stat-chars">0</div>
+          <div class="stat-label">文字数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat-paras">0</div>
+          <div class="stat-label">段落数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat-lines">0</div>
+          <div class="stat-label">行数</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="convert()">変換する →</button>
+        <button class="btn secondary" onclick="clearAll()">クリア</button>
+      </div>
+    </div>
+
+    <div class="card" id="output-card" style="display:none">
+      <div class="card-title">② 変換結果（body の値として使用）</div>
+      <textarea class="output-area" id="output" readonly></textarea>
+      <p class="output-info" id="output-info"></p>
+      <div class="btn-row">
+        <button class="btn" id="copy-btn" onclick="copyOutput()">コピーする</button>
+        <button class="btn secondary" id="copy-key-btn" onclick="copyWithKey()">body ごとコピー</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inputEl = document.getElementById('input');
+
+    inputEl.addEventListener('input', updateStats);
+
+    function updateStats() {
+      const raw = inputEl.value;
+      if (!raw.trim()) {
+        document.getElementById('stats').style.display = 'none';
+        return;
+      }
+      const chars = raw.replace(/[\s\u3000]/g, '').length; // 全角スペースも除外
+      const paras = raw.split(/\n\n+/).filter(p => p.trim()).length;
+      const lines = raw.split('\n').length;
+
+      document.getElementById('stat-chars').textContent = chars.toLocaleString();
+      document.getElementById('stat-paras').textContent = paras;
+      document.getElementById('stat-lines').textContent = lines;
+      document.getElementById('stats').style.display = 'flex';
+    }
+
+    function convert() {
+      const raw = inputEl.value;
+      if (!raw.trim()) {
+        alert('本文を入力してください。');
+        return;
+      }
+
+      const trimmed = raw.trim();
+
+      // JSON文字列値として安全な形にエスケープ
+      const escaped = trimmed
+        .replace(/\\/g, '\\\\')    // バックスラッシュ
+        .replace(/"/g, '\\"')      // ダブルクォート
+        .replace(/\r\n/g, '\n')    // Windows改行を統一
+        .replace(/\n/g, '\\n');    // 改行をエスケープ
+
+      const outputEl = document.getElementById('output');
+      outputEl.value = escaped;
+
+      const paraCount = trimmed.split(/\n\n+/).filter(p => p.trim()).length;
+      document.getElementById('output-info').textContent =
+        `段落数: ${paraCount}　※ 空行（\\n\\n）が段落の区切りになります`;
+
+      const card = document.getElementById('output-card');
+      card.style.display = 'block';
+
+      // 出力欄の高さを内容に合わせる
+      outputEl.style.height = 'auto';
+      outputEl.style.height = Math.min(outputEl.scrollHeight, 300) + 'px';
+
+      // ボタンをリセット
+      resetBtn('copy-btn', 'コピーする', 'btn');
+      resetBtn('copy-key-btn', 'body ごとコピー', 'btn secondary');
+
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function copyOutput() {
+      const val = document.getElementById('output').value;
+      if (!val) return;
+      navigator.clipboard.writeText(val).then(() => {
+        flashBtn('copy-btn', 'コピーしました ✓', 'btn success', 'コピーする', 'btn');
+      });
+    }
+
+    function copyWithKey() {
+      const val = document.getElementById('output').value;
+      if (!val) return;
+      const full = `"body": "${val}"`;
+      navigator.clipboard.writeText(full).then(() => {
+        flashBtn('copy-key-btn', 'コピーしました ✓', 'btn success', 'body ごとコピー', 'btn secondary');
+      });
+    }
+
+    function flashBtn(id, activeText, activeClass, defaultText, defaultClass) {
+      const btn = document.getElementById(id);
+      btn.textContent = activeText;
+      btn.className = activeClass;
+      setTimeout(() => {
+        btn.textContent = defaultText;
+        btn.className = defaultClass;
+      }, 2000);
+    }
+
+    function resetBtn(id, text, cls) {
+      const btn = document.getElementById(id);
+      btn.textContent = text;
+      btn.className = cls;
+    }
+
+    function clearAll() {
+      inputEl.value = '';
+      document.getElementById('output').value = '';
+      document.getElementById('output-card').style.display = 'none';
+      document.getElementById('stats').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

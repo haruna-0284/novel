@@ -1,0 +1,34 @@
+{
+  "works": [
+    {
+      "id": "w001",
+      "title": "傘と珈琲と彼女の嘘",
+      "url": "work.html?id=w001",
+      "genre": ["日常", "恋愛"],
+      "length": "short",
+      "charCount": 980,
+      "publishedAt": "2024-11-02",
+      "description": "雨の日の喫茶店で、彼女はいつも同じ嘘をついた。傘を忘れたと。"
+    },
+    {
+      "id": "w002",
+      "title": "月が落ちる夜に",
+      "url": "work.html?id=w002",
+      "genre": ["ファンタジー"],
+      "length": "medium",
+      "charCount": 2400,
+      "publishedAt": "2024-10-15",
+      "description": "月が海に落ちる日が来たら、世界はどうなるのか。古老だけが知っていた。"
+    },
+    {
+      "id": "w003",
+      "title": "冷蔵庫の中の怪物",
+      "url": "work.html?id=w003",
+      "genre": ["ホラー", "日常"],
+      "length": "short",
+      "charCount": 750,
+      "publishedAt": "2024-09-28",
+      "description": "三日間、誰も気づかなかった。冷蔵庫の奥に、それはいた。"
+    }
+  ]
+}

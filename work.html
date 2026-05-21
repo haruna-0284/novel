@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>読み込み中... - ナマケモノ文庫</title>
+  <link rel="stylesheet" href="../style.css" />
+  <!-- marked.js: Markdown → HTML 変換 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    /* =====================
+       Novel header
+       ===================== */
+    .novel-header {
+      background: var(--black);
+      padding: 2.5rem 2rem 1.5rem;
+    }
+
+    .novel-date {
+      font-size: 0.72rem;
+      color: #aaa;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    .novel-title {
+      font-family: 'Noto Serif JP', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    /* =====================
+       Body wrap
+       ===================== */
+    .novel-body-wrap {
+      background: var(--white);
+      border-left: var(--border);
+      border-right: var(--border);
+      border-bottom: var(--border);
+    }
+
+    .novel-body {
+      padding: 2rem 2.5rem;
+      max-width: 680px;
+    }
+
+    .novel-body p {
+      font-family: 'Noto Serif JP', sans-serif;
+      font-size: 1rem;
+      line-height: 2.1;
+      color: #111;
+      margin-bottom: 1.4em;
+    }
+
+    .novel-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* =====================
+       Themes
+       ===================== */
+    .themes-section {
+      border-top: var(--border);
+      padding: 1rem 2rem;
+      background: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .themes-toggle-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      background: var(--black);
+      color: var(--white);
+      border: 2px solid var(--black);
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+      line-height: 1.4;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .themes-toggle-btn:hover {
+      background: #333;
+    }
+
+    .themes-toggle-btn.revealed {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .themes-toggle-btn.revealed:hover {
+      background: #e8e8e0;
+    }
+
+    .themes-answers {
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      max-width: 0;
+      transition: max-width 0.4s ease;
+      border-top: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      border-right: 2px solid var(--black);
+      margin-left: -2px;
+    }
+
+    .themes-answers.visible {
+      max-width: 600px;
+    }
+
+    .theme-tag {
+      font-family: 'Noto Serif JP', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--white);
+      padding: 0.45rem 1rem;
+      white-space: nowrap;
+      border-right: 2px solid var(--black);
+    }
+
+    .theme-tag:last-child {
+      border-right: none;
+    }
+
+    /* =====================
+       Meta
+       ===================== */
+    .novel-meta {
+      border-top: var(--border);
+      padding: 1rem 2rem;
+      background: var(--gray);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .meta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: #555;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      font-size: 0.8rem;
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    /* =====================
+       Nav
+       ===================== */
+    .novel-nav {
+      border-top: var(--border);
+      padding: 1rem 2rem;
+      background: var(--white);
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      text-decoration: none;
+      color: var(--white);
+      border: 2px solid var(--black);
+      padding: 0.35rem 1.2rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      background: var(--black);
+      transition: background 0.15s;
+    }
+
+    .nav-link:hover {
+      background: #333;
+    }
+
+    /* =====================
+       Responsive
+       ===================== */
+    @media (max-width: 600px) {
+      .novel-header {
+        padding: 2rem 1.25rem 1.25rem;
+      }
+
+      .novel-title {
+        font-size: 1.3rem;
+      }
+
+      .novel-body {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .themes-section {
+        padding: 0.85rem 1.25rem;
+      }
+
+      .novel-meta {
+        padding: 1rem 1.25rem;
+        gap: 1.2rem;
+      }
+
+      .novel-nav {
+        padding: 1rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="../index.html" class="site-title">ナマケモノ文庫</a>
+    <!-- 作者ページのURLを href に設定してください -->
+    <a href="https://lit.link/sloth_folivora" class="author-link" target="_blank" rel="noopener">About the Author →</a>
+  </header>
+
+  <div class="novel-header">
+    <p class="novel-date" id="novel-date"></p>
+    <h1 class="novel-title" id="novel-title">読み込み中...</h1>
+  </div>
+
+  <div class="novel-body-wrap">
+    <div class="novel-body" id="novel-body"></div>
+
+    <div class="themes-section">
+      <button class="themes-toggle-btn" id="themes-btn" aria-expanded="false">
+        お題を見る ▶
+      </button>
+      <div class="themes-answers" id="themes-answers" aria-hidden="true"></div>
+    </div>
+
+    <div class="novel-meta" id="novel-meta"></div>
+
+    <div class="novel-nav">
+      <a href="../index.html" class="nav-link">一覧へ戻る</a>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../js/work.js"></script>
+</body>
+</html>

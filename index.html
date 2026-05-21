@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ナマケモノ文庫</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* =====================
+       Hero
+       ===================== */
+    .hero {
+      background: var(--gray);
+      border-bottom: var(--border);
+      padding: 2rem;
+    }
+
+    .hero-inner {
+      max-width: 680px;
+    }
+
+    .hero h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+      color: var(--black);
+    }
+
+    .hero p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #222;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.2rem;
+    }
+
+    .stat {
+      border-left: 3px solid var(--black);
+      padding-left: 0.75rem;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: var(--black);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #333;
+      letter-spacing: 0.05em;
+      margin-top: 0.1rem;
+    }
+
+    /* =====================
+       Controls
+       ===================== */
+    .controls {
+      padding: 0.85rem 2rem;
+      border-bottom: var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      background: var(--white);
+    }
+
+    .control-group {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .control-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: #333;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .sep {
+      width: 1px;
+      height: 1.8rem;
+      background: #999;
+    }
+
+    .filter-btn {
+      font-size: 0.75rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: 2px solid #000;
+      padding: 0.45rem 0.8rem;
+      background: #fff;
+      cursor: pointer;
+      color: #000;
+      font-weight: 500;
+      outline: none;
+      border-radius: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      line-height: 1.4;
+      height: 2.2rem;
+    }
+
+    .filter-btn:hover {
+      background: #e8e8e0;
+    }
+
+    .filter-btn.active {
+      background: #000;
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .genre-select,
+    .sort-select {
+      font-size: 0.75rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: 2px solid #000;
+      padding: 0.45rem 2rem 0.45rem 0.7rem;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.55rem center;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      color: #000;
+      font-weight: 500;
+      border-radius: 0;
+      line-height: 1.4;
+      height: 2.2rem;
+    }
+
+    /* =====================
+       Works grid
+       ===================== */
+    .result-count {
+      font-size: 0.72rem;
+      color: #333;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 2rem;
+      border-bottom: var(--border);
+      background: var(--white);
+      font-weight: 500;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0;
+      border-left: var(--border);
+      flex: 1;
+    }
+
+    .work-card {
+      border-right: var(--border);
+      border-bottom: var(--border);
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.1s;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .work-card:hover {
+      background: var(--gray);
+    }
+
+    .work-card:hover .card-arrow {
+      opacity: 1;
+    }
+
+    .card-genre-row {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .genre-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      border: 2px solid #000;
+      padding: 0.15rem 0.5rem;
+      color: #000;
+      font-weight: 500;
+      background: var(--white);
+    }
+
+    .length-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      border: 2px solid #000;
+      padding: 0.15rem 0.5rem;
+      background: var(--black);
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .card-title {
+      font-family: 'Noto Serif JP', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      color: #000;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: #333;
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.15s;
+      color: #000;
+    }
+
+    .empty {
+      padding: 3rem 2rem;
+      color: #555;
+      font-size: 0.85rem;
+      background: var(--white);
+    }
+
+    /* =====================
+       Responsive
+       ===================== */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .controls {
+        padding: 0.75rem 1.25rem;
+        gap: 0.5rem;
+      }
+
+      .result-count {
+        padding: 0.5rem 1.25rem;
+      }
+
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .work-card {
+        padding: 1rem 1.25rem;
+      }
+
+      .sep {
+        display: none;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <span class="site-title">ナマケモノ文庫</span>
+    <!-- 作者ページのURLを href に設定してください -->
+    <a href="https://lit.link/sloth_folivora" class="author-link" target="_blank" rel="noopener">About the Author →</a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <!-- サイト紹介文を編集してください -->
+      <h2>短いお話の本棚</h2>
+      <p>
+        掌編～短編までの短いお話を不定期に公開しています。
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num" id="total-count">0</div>
+          <div class="stat-label">作品</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="control-group">
+      <span class="control-label">ジャンル</span>
+      <select class="genre-select" id="genre-select" aria-label="ジャンルで絞り込み">
+        <option value="all">すべて</option>
+        <!-- ジャンルはJSで動的生成されます -->
+      </select>
+    </div>
+    <div class="sep"></div>
+    <div class="control-group">
+      <span class="control-label">長さ</span>
+      <button class="filter-btn active" data-filter-length="all">すべて</button>
+      <button class="filter-btn" data-filter-length="short">短編</button>
+      <button class="filter-btn" data-filter-length="medium">中編</button>
+      <button class="filter-btn" data-filter-length="long">長編</button>
+    </div>
+    <div class="sep"></div>
+    <div class="control-group">
+      <span class="control-label">並び替え</span>
+      <select class="sort-select" id="sort-select" aria-label="並び替え">
+        <option value="date-desc">新しい順</option>
+        <option value="date-asc">古い順</option>
+        <option value="chars-desc">文字数（多）</option>
+        <option value="chars-asc">文字数（少）</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-count" id="result-count" aria-live="polite"></div>
+  <main class="works-grid" id="works-grid"></main>
+  <div class="empty" id="empty" style="display:none">該当する作品がありません。</div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/list.js"></script>
+</body>
+</html>

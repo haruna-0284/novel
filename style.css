@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --gray: #f5f5f0;
+  --border: 2px solid #000;
+  --shadow: 3px 3px 0 #000;
+}
+
+body {
+  background: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--black);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================
+   Header
+   ===================== */
+.site-header {
+  border-bottom: var(--border);
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.author-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--black);
+  border: 2px solid var(--white);
+  padding: 0.35rem 0.75rem;
+  background: var(--white);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.author-link:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--white);
+}
+
+/* =====================
+   Footer
+   ===================== */
+.site-footer {
+  border-top: var(--border);
+  padding: 1rem 2rem;
+  background: var(--black);
+  margin-top: auto;
+}
+
+.site-footer p {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+/* =====================
+   Responsive
+   ===================== */
+@media (max-width: 600px) {
+  .site-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  .author-link {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.55rem;
+  }
+}
