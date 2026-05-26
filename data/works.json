@@ -1,34 +1,104 @@
 {
   "works": [
     {
-      "id": "w001",
-      "title": "傘と珈琲と彼女の嘘",
-      "url": "work.html?id=w001",
-      "genre": ["日常", "恋愛"],
+      "id": "w010",
+      "title": "高層階から",
+      "url": "work.html?id=w010",
+      "genre": ["人間ドラマ"],
       "length": "short",
-      "charCount": 980,
-      "publishedAt": "2024-11-02",
-      "description": "雨の日の喫茶店で、彼女はいつも同じ嘘をついた。傘を忘れたと。"
+      "charCount": 900,
+      "publishedAt": "2026-04-26",
+      "description": "停電した超高層ホテルに泊まっていた男は酒が飲みたくて……。"
     },
     {
-      "id": "w002",
-      "title": "月が落ちる夜に",
-      "url": "work.html?id=w002",
-      "genre": ["ファンタジー"],
-      "length": "medium",
-      "charCount": 2400,
-      "publishedAt": "2024-10-15",
-      "description": "月が海に落ちる日が来たら、世界はどうなるのか。古老だけが知っていた。"
+      "id": "w009",
+      "title": "シエスタイムスリップ",
+      "url": "work.html?id=w009",
+      "genre": ["SF", "ファンタジー"],
+      "length": "short",
+      "charCount": 950,
+      "publishedAt": "2026-04-26",
+      "description": "昼寝で幽体離脱した少年が見たのは。"
+    },
+    {
+      "id": "w008",
+      "title": "踊れ、おれ",
+      "url": "work.html?id=w008",
+      "genre": ["不条理"],
+      "length": "short",
+      "charCount": 800,
+      "publishedAt": "2026-04-26",
+      "description": "ある部族のご神体を破壊した男は踊るように強要される。"
+    },
+    {
+      "id": "w007",
+      "title": "俺たち一発屋",
+      "url": "work.html?id=w007",
+      "genre": ["青春"],
+      "length": "short",
+      "charCount": 750,
+      "publishedAt": "2026-04-26",
+      "description": "売れない芸人が考えた「ローション野球」は世界に広まって……。"
+    },
+    {
+      "id": "w006",
+      "title": "海藻泥棒",
+      "url": "work.html?id=w006",
+      "genre": ["SF", "コメディ"],
+      "length": "short",
+      "charCount": 550,
+      "publishedAt": "2026-04-26",
+      "description": "わかめおにぎりさえも盗んでいく海藻泥棒の目的は。"
+    },
+    {
+      "id": "w005",
+      "title": "地上げ屋",
+      "url": "work.html?id=w005",
+      "genre": ["ミステリー"],
+      "length": "short",
+      "charCount": 280,
+      "publishedAt": "2026-04-26",
+      "description": "どこに行っても追い出される男。"
+    },
+    {
+      "id": "w004",
+      "title": "バカにつける薬",
+      "url": "work.html?id=w004",
+      "genre": ["風刺", "皮肉"],
+      "length": "short",
+      "charCount": 280,
+      "publishedAt": "2026-04-26",
+      "description": "成果を上げる生徒指導の理由は。"
     },
     {
       "id": "w003",
-      "title": "冷蔵庫の中の怪物",
+      "title": "蕎麦が降る",
       "url": "work.html?id=w003",
-      "genre": ["ホラー", "日常"],
+      "genre": ["SF", "不条理"],
       "length": "short",
-      "charCount": 750,
-      "publishedAt": "2024-09-28",
-      "description": "三日間、誰も気づかなかった。冷蔵庫の奥に、それはいた。"
+      "charCount": 380,
+      "publishedAt": "2026-04-26",
+      "description": "蕎麦が降るようになってつぶれた蕎麦屋の三代目は……。"
+    },
+    {
+      "id": "w002",
+      "title": "たこのたこ焼き屋",
+      "url": "work.html?id=w002",
+      "genre": ["シュール"],
+      "length": "short",
+      "charCount": 250,
+      "publishedAt": "2026-04-26",
+      "description": "海で一番足が多いたこの、おいしいたこ焼き屋。"
+    },
+    {
+      "id": "w001",
+      "title": "宇宙の住人",
+      "url": "work.html?id=w001",
+      "genre": ["SF", "日常"],
+      "length": "short",
+      "charCount": 280,
+      "publishedAt": "2026-04-26",
+      "description": "宇宙に移民した未来人が怖いのは……"
     }
   ]
 }
