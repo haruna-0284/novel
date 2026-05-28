@@ -1,5 +1,5 @@
 // フッターを読み込む
-fetch('../footer.html')
+fetch('footer.html')
   .then(res => res.text())
   .then(html => {
     document.getElementById('footer-placeholder').innerHTML = html;
@@ -14,7 +14,7 @@ const workId = params.get('id');
 if (!workId) {
   showError('作品IDが指定されていません。');
 } else {
-  fetch(`../data/works/${workId}.json`)
+  fetch(`data/works/${workId}.json`)
     .then(res => {
       if (!res.ok) throw new Error('not found');
       return res.json();
