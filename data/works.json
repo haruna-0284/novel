@@ -1,6 +1,16 @@
 {
   "works": [
     {
+      "id": "w011",
+      "title": "生き残れ！　車校",
+      "url": "work.html?id=w011",
+      "genre": ["コメディ"],
+      "length": "short",
+      "charCount": 650,
+      "publishedAt": "2026-04-26",
+      "description": "自動運転が普及。この自動車学校も廃校になるのか？"
+    },
+    {
       "id": "w010",
       "title": "高層階から",
       "url": "work.html?id=w010",
