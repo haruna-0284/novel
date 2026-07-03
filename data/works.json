@@ -7,8 +7,7 @@
       "genre": ["コメディ"],
       "length": "short",
       "charCount": 650,
-      "publishedAt": "2026-04-26",
-      "description": "自動運転が普及。この自動車学校も廃校になるのか？"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w010",
@@ -17,8 +16,7 @@
       "genre": ["人間ドラマ"],
       "length": "short",
       "charCount": 900,
-      "publishedAt": "2026-04-26",
-      "description": "停電した超高層ホテルに泊まっていた男は酒が飲みたくなり……。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w009",
@@ -27,8 +25,7 @@
       "genre": ["SF", "ファンタジー"],
       "length": "short",
       "charCount": 950,
-      "publishedAt": "2026-04-26",
-      "description": "昼寝で幽体離脱した少年が見たのは。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w008",
@@ -37,8 +34,7 @@
       "genre": ["不条理"],
       "length": "short",
       "charCount": 800,
-      "publishedAt": "2026-04-26",
-      "description": "ある部族のご神体を破壊した男は踊るように強要される。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w007",
@@ -47,8 +43,7 @@
       "genre": ["青春"],
       "length": "short",
       "charCount": 750,
-      "publishedAt": "2026-04-26",
-      "description": "売れない芸人が考えた「ローション野球」は世界に広まって……"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w006",
@@ -57,8 +52,7 @@
       "genre": ["SF", "コメディ"],
       "length": "short",
       "charCount": 550,
-      "publishedAt": "2026-04-26",
-      "description": "わかめおにぎりさえも盗んでいく海藻泥棒の目的は。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w005",
@@ -67,8 +61,7 @@
       "genre": ["ミステリー"],
       "length": "short",
       "charCount": 280,
-      "publishedAt": "2026-04-26",
-      "description": "どこに行っても追い出される男。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w004",
@@ -77,8 +70,7 @@
       "genre": ["風刺", "皮肉"],
       "length": "short",
       "charCount": 280,
-      "publishedAt": "2026-04-26",
-      "description": "成果を上げる生徒指導の理由は。"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w003",
@@ -87,8 +79,7 @@
       "genre": ["SF", "不条理"],
       "length": "short",
       "charCount": 380,
-      "publishedAt": "2026-04-26",
-      "description": "蕎麦が降るようになってつぶれた蕎麦屋の三代目は……"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w002",
@@ -97,8 +88,7 @@
       "genre": ["シュール"],
       "length": "short",
       "charCount": 250,
-      "publishedAt": "2026-04-26",
-      "description": "海で一番足が多いたこの、おいしいたこ焼き屋"
+      "publishedAt": "2026-04-26"
     },
     {
       "id": "w001",
@@ -107,8 +97,7 @@
       "genre": ["SF", "日常"],
       "length": "short",
       "charCount": 280,
-      "publishedAt": "2026-04-26",
-      "description": "三日間、誰も気づかなかった。冷蔵庫の奥に、それはいた。"
+      "publishedAt": "2026-04-26"
     }
   ]
 }
