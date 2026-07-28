@@ -62,12 +62,11 @@
         const a = document.createElement("a");
         a.className = "novel-card";
         a.href = `novel.html?id=${encodeURIComponent(n.id)}`;
-        const sheets = (n.length / 400).toFixed(1);
         a.innerHTML = `
           <h2>${escapeHtml(n.title)}</h2>
           <div class="card-meta">
             <span class="stamp-date">${formatDate(n.publishedDate)}</span>
-            <span class="stamp-length">${n.length.toLocaleString()}字<small>約${sheets}枚</small></span>
+            <span class="stamp-length">${n.length.toLocaleString()}字</span>
           </div>`;
         gridEl.appendChild(a);
       }

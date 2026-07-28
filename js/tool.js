@@ -80,16 +80,23 @@
     URL.revokeObjectURL(url);
   }
 
+  function getFieldValue(id) {
+    const el = document.getElementById(id);
+    if (!el) {
+      console.error(`要素が見つかりません: #${id}（tool.html と tool.js のバージョンが一致していない可能性があります。ブラウザのキャッシュを更新してください）`);
+      return "";
+    }
+    return el.value;
+  }
+
   document.getElementById("processBtn").addEventListener("click", () => {
-    const title = document.getElementById("titleInput").value.trim();
-    const id = document.getElementById("idInput").value.trim();
-    const createdDate = document.getElementById("createdDateInput").value;
-    const publishedDate = document.getElementById("publishedDateInput").value;
-    const modifiedDate = document.getElementById("modifiedDateInput").value;
-    const theme1 = document.getElementById("theme1Input").value.trim();
-    const theme2 = document.getElementById("theme2Input").value.trim();
-    const theme3 = document.getElementById("theme3Input").value.trim();
-    const raw = document.getElementById("rawTextInput").value;
+    const title = getFieldValue("titleInput").trim();
+    const id = getFieldValue("idInput").trim();
+    const createdDate = getFieldValue("createdDateInput");
+    const publishedDate = getFieldValue("publishedDateInput");
+    const modifiedDate = getFieldValue("modifiedDateInput");
+    const themesRaw = getFieldValue("themesInput").trim();
+    const raw = getFieldValue("rawTextInput");
 
     const errors = [];
     if (!title) errors.push("タイトルを入力してください。");
@@ -113,7 +120,10 @@
     renderWarnings(warnings);
 
     const length = computeLength(paragraphs);
-    const themes = [theme1, theme2, theme3].filter(Boolean);
+    const themes = themesRaw
+      .split("・")
+      .map((t) => t.trim())
+      .filter(Boolean);
 
     const detail = { id, title };
     if (createdDate) detail.createdDate = createdDate;
@@ -125,8 +135,7 @@
 
     const listSnippet = { id, title, publishedDate, length };
 
-    document.getElementById("lengthDisplay").textContent =
-      `${length.toLocaleString()}字（約${(length / 400).toFixed(1)}枚 / 400字詰め換算）`;
+    document.getElementById("lengthDisplay").textContent = `${length.toLocaleString()}字`;
     document.getElementById("detailJsonOutput").value = JSON.stringify(detail, null, 2);
     document.getElementById("listSnippetOutput").value = JSON.stringify(listSnippet, null, 2);
     resultSection.hidden = false;

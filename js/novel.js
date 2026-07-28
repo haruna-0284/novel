@@ -30,10 +30,9 @@
     document.title = `${novel.title} | 原稿棚`;
     titleEl.textContent = novel.title;
 
-    const sheets = (novel.length / 400).toFixed(1);
     const metaParts = [
       `<span class="stamp-date">公開 ${fmt(novel.publishedDate)}</span>`,
-      `<span class="stamp-length">${novel.length.toLocaleString()}字<small>約${sheets}枚</small></span>`
+      `<span class="stamp-length">${novel.length.toLocaleString()}字</span>`
     ];
     if (novel.createdDate) metaParts.push(`<span class="stamp-date-sub">作成 ${fmt(novel.createdDate)}</span>`);
     if (novel.modifiedDate) metaParts.push(`<span class="stamp-date-sub">修正 ${fmt(novel.modifiedDate)}</span>`);
