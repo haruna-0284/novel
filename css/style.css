@@ -6,7 +6,7 @@
    ========================================================================== */
 
 :root {
-  --paper: #F5F1E6;
+  --paper: #FBFAF7;
   --paper-line: rgba(28, 43, 69, 0.08);
   --ink: #1C2B45;      /* 紺：主要な文字・枠線 */
   --brown: #5B4636;    /* 茶：副次的な要素 */
@@ -106,31 +106,6 @@ button, select, input, textarea {
 .author-link:active {
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0 var(--ink);
-}
-
-/* ---------- 見出し帯（原稿用紙の方眼を背景に） ---------- */
-
-.masthead {
-  padding: 2.6rem 1.5rem 2.2rem;
-  border-bottom: var(--border-w) solid var(--ink);
-  background-image:
-    linear-gradient(var(--paper-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.masthead h1 {
-  margin: 0 0 0.6rem;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-}
-
-.masthead p {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--brown);
 }
 
 /* ---------- 並び替えバー ---------- */
@@ -238,13 +213,6 @@ button, select, input, textarea {
   display: inline-block;
   transform: rotate(-3deg);
   line-height: 1.3;
-}
-
-.stamp-length small {
-  display: block;
-  font-weight: 400;
-  font-size: 0.62rem;
-  color: var(--brown);
 }
 
 .empty-msg {
