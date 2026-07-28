@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>原稿棚 ― 掌編・短編小説アーカイブ</title>
+<title>読み込み中… | 原稿棚</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -17,35 +17,26 @@
   <a class="author-link" href="https://example.com/author/" target="_blank" rel="noopener">作者について</a>
 </header>
 
-<div class="masthead">
-  <h1>短い物語を、いくつか。</h1>
-  <p>数百字の掌編から、一万字ほどの短編まで。書いたものを並べています。</p>
-</div>
-
-<div class="controls-bar">
-  <div>
-    <label for="sortSelect">並び替え</label>
-    <select id="sortSelect" class="sort-select">
-      <option value="date-desc">公開日：新しい順</option>
-      <option value="date-asc">公開日：古い順</option>
-      <option value="length-desc">文字数：長い順</option>
-      <option value="length-asc">文字数：短い順</option>
-    </select>
+<main id="novelContainer">
+  <div class="novel-header">
+    <h1 id="novelTitle">読み込み中…</h1>
+    <div class="novel-meta-row" id="novelMeta"></div>
   </div>
-  <div class="result-count" id="resultCount"></div>
-</div>
 
-<main>
-  <div class="novel-grid" id="novelGrid">
-    <p class="empty-msg">読み込み中…</p>
+  <article class="novel-article" id="novelArticle"></article>
+
+  <div class="theme-section" id="themeSection" style="display:none;">
+    <button class="theme-btn" id="themeBtn" type="button">お題を表示</button>
+    <div class="theme-chips" id="themeChips" hidden></div>
   </div>
-  <nav class="pagination" id="pagination" aria-label="ページ送り"></nav>
 </main>
+
+<a class="back-link" href="index.html">← 一覧にもどる</a>
 
 <footer class="site-footer">
   &copy; <span id="yearSpan"></span> 原稿棚
 </footer>
 
-<script src="js/list.js"></script>
+<script src="js/novel.js"></script>
 </body>
 </html>

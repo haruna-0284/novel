@@ -1,0 +1,38 @@
+[
+{
+  "id": "novel-01",
+  "title": "宇宙の住人",
+  "publishedDate": "2026-07-28",
+  "length": 210
+},
+{
+  "id": "novel-02",
+  "title": "たこのたこ焼き屋",
+  "publishedDate": "2026-07-28",
+  "length": 296
+},
+{
+  "id": "novel-03",
+  "title": "そばが降る",
+  "publishedDate": "2026-07-28",
+  "length": 352
+},
+{
+  "id": "novel-04",
+  "title": "バカにつける薬",
+  "publishedDate": "2026-07-28",
+  "length": 273
+},
+{
+  "id": "novel-05",
+  "title": "地上げ屋",
+  "publishedDate": "2026-07-28",
+  "length": 286
+},
+{
+  "id": "novel-06",
+  "title": "海藻泥棒",
+  "publishedDate": "2026-07-28",
+  "length": 580
+}
+]

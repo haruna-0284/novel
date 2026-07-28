@@ -1,0 +1,600 @@
+/* ==========================================================================
+   原稿棚 — 小説公開サイト用スタイル
+   デザイン方針：ネオブルータリズム（太枠・オフセット影・角丸なし）
+   紙のような白（暖色）＋ 紺・茶をベースに、赤／青／黄の原色をスタンプ的に使用
+   400字詰め原稿用紙の方眼を、見出し帯の背景にごく控えめに使用（サイトの署名要素）
+   ========================================================================== */
+
+:root {
+  --paper: #F5F1E6;
+  --paper-line: rgba(28, 43, 69, 0.08);
+  --ink: #1C2B45;      /* 紺：主要な文字・枠線 */
+  --brown: #5B4636;    /* 茶：副次的な要素 */
+  --charcoal: #2A2A2A;
+  --red: #D7263D;
+  --blue: #1E5AA8;
+  --yellow: #F2B705;
+
+  --border-w: 3px;
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-sm: 3px 3px 0 var(--ink);
+
+  --font-display: "Noto Sans JP", "Hiragino Sans", sans-serif;
+  --font-body: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+a { color: inherit; }
+
+img { max-width: 100%; }
+
+button, select, input, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ---------- ヘッダー ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: var(--border-w) solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.site-title small {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.65rem;
+  color: var(--brown);
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+}
+
+/* 作者ページへのリンク：ここのhrefを実際のプロフィールサイトURLに変更してください */
+.author-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  padding: 0.4rem 0.8rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  white-space: nowrap;
+}
+.author-link:hover,
+.author-link:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.author-link:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* ---------- 見出し帯（原稿用紙の方眼を背景に） ---------- */
+
+.masthead {
+  padding: 2.6rem 1.5rem 2.2rem;
+  border-bottom: var(--border-w) solid var(--ink);
+  background-image:
+    linear-gradient(var(--paper-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.masthead h1 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+}
+
+.masthead p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--brown);
+}
+
+/* ---------- 並び替えバー ---------- */
+
+.controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid var(--ink);
+}
+
+.controls-bar label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.sort-select {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.result-count {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brown);
+}
+
+/* ---------- 一覧グリッド ---------- */
+
+.novel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.4rem;
+  padding: 1.6rem 1.5rem;
+}
+
+.novel-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  background: var(--paper);
+  border: var(--border-w) solid var(--ink);
+  box-shadow: var(--shadow);
+  padding: 1.2rem 1.2rem 1.3rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.novel-card:hover,
+.novel-card:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+
+.novel-card:active {
+  transform: translate(1px, 1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.novel-card h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.stamp-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: 2px solid var(--ink);
+  padding: 0.15rem 0.5rem;
+}
+
+.stamp-date-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--brown);
+}
+
+.stamp-length {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.72rem;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 0.15rem 0.5rem;
+  display: inline-block;
+  transform: rotate(-3deg);
+  line-height: 1.3;
+}
+
+.stamp-length small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.62rem;
+  color: var(--brown);
+}
+
+.empty-msg {
+  padding: 2rem;
+  font-family: var(--font-mono);
+  color: var(--brown);
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* ---------- ページネーション ---------- */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1.5rem;
+}
+
+.page-btn {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.page-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ---------- フッター ---------- */
+
+.site-footer {
+  border-top: var(--border-w) solid var(--ink);
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--brown);
+}
+
+.back-link {
+  display: inline-block;
+  margin: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* ---------- 個別小説ページ ---------- */
+
+.novel-header {
+  padding: 2.2rem 1.5rem 1.6rem;
+  border-bottom: 6px double var(--ink);
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+.novel-header h1 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  line-height: 1.4;
+}
+
+.novel-meta-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.novel-article {
+  max-width: 38em;
+  margin: 0 auto;
+  padding: 2.4rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 2.15;
+}
+
+.novel-article p {
+  margin: 0 0 1.15em;
+}
+
+.theme-section {
+  max-width: 38em;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  text-align: center;
+}
+
+.theme-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: var(--border-w) solid var(--ink);
+  background: var(--yellow);
+  padding: 0.75rem 1.6rem;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.theme-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+
+.theme-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.theme-chips {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.theme-chips[hidden] { display: none; }
+
+.theme-chip {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--ink);
+  color: var(--paper);
+}
+
+.theme-chip:nth-child(3n+1) { background: var(--red); }
+.theme-chip:nth-child(3n+2) { background: var(--blue); }
+.theme-chip:nth-child(3n+3) { background: var(--yellow); color: var(--ink); }
+
+/* ---------- ツールページ ---------- */
+
+.tool-main {
+  max-width: 46em;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.tool-notice {
+  border: 2px solid var(--brown);
+  background: var(--paper-line);
+  padding: 0.9rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brown);
+  margin-bottom: 2rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.field input {
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 0.5rem 0.6rem;
+  font-size: 0.95rem;
+}
+
+.field-hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--brown);
+}
+
+.textarea-field {
+  margin-bottom: 1.4rem;
+}
+
+textarea#rawTextInput {
+  width: 100%;
+  min-height: 260px;
+  border: var(--border-w) solid var(--ink);
+  background: #fff;
+  padding: 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.9;
+  resize: vertical;
+}
+
+.primary-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  border: var(--border-w) solid var(--ink);
+  background: var(--blue);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.primary-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.primary-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+
+.secondary-btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.secondary-btn:hover { background: var(--ink); color: var(--paper); }
+
+.error-box {
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 0.9rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin: 1.2rem 0;
+}
+.error-box[hidden] { display: none; }
+
+.warnings-box {
+  margin-top: 1.5rem;
+}
+
+.warn-count {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--brown);
+  margin-bottom: 0.6rem;
+}
+
+.ok-msg {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--blue);
+}
+
+.warn-item {
+  border-left: 4px solid var(--red);
+  background: #fff;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.warn-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
+}
+
+.warn-line {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--brown);
+}
+
+.warn-text {
+  font-family: var(--font-body);
+}
+
+.result-section {
+  margin-top: 2.5rem;
+  border-top: var(--border-w) solid var(--ink);
+  padding-top: 1.6rem;
+}
+.result-section[hidden] { display: none; }
+
+.result-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.length-display {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--red);
+  border: 2px solid var(--red);
+  padding: 0.3rem 0.7rem;
+  margin-bottom: 1.2rem;
+  transform: rotate(-2deg);
+}
+
+.output-block {
+  margin-bottom: 1.6rem;
+}
+
+.output-block h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.output-block textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.8rem;
+}
+
+.output-actions {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .novel-header, .novel-article, .theme-section { padding-left: 1.1rem; padding-right: 1.1rem; }
+}

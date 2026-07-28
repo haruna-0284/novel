@@ -1,108 +1,138 @@
-// フッターを読み込む
-fetch('footer.html')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById('footer-placeholder').innerHTML = html;
-  });
+(function () {
+  "use strict";
 
-const LENGTH_LABEL = { short: '短編', medium: '中編', long: '長編' };
+  const PAGE_SIZE = 20;
+  const DATA_URL = "data/novels.json";
 
-let allWorks = [];
-let genreFilter = 'all';
-let lengthFilter = 'all';
-let sortKey = 'date-desc';
+  let allNovels = [];
+  let currentSort = "date-desc";
+  let currentPage = 1;
 
-// データ読み込み
-fetch('data/works.json')
-  .then(res => res.json())
-  .then(data => {
-    allWorks = data.works;
-    initGenreSelect();
-    document.getElementById('total-count').textContent = allWorks.length;
-    render();
-  })
-  .catch(() => {
-    document.getElementById('works-grid').innerHTML =
-      '<p style="padding:2rem;color:#666;">作品データを読み込めませんでした。</p>';
-  });
+  const gridEl = document.getElementById("novelGrid");
+  const paginationEl = document.getElementById("pagination");
+  const sortSelectEl = document.getElementById("sortSelect");
+  const resultCountEl = document.getElementById("resultCount");
+  const yearEl = document.getElementById("yearSpan");
 
-// ジャンル選択肢を動的生成
-function initGenreSelect() {
-  const genres = [...new Set(allWorks.flatMap(w => w.genre))].sort();
-  const select = document.getElementById('genre-select');
-  genres.forEach(g => {
-    const opt = document.createElement('option');
-    opt.value = g;
-    opt.textContent = g;
-    select.appendChild(opt);
-  });
-}
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// フィルタ＆ソート
-function filterAndSort() {
-  return allWorks
-    .filter(w => {
-      const gOk = genreFilter === 'all' || w.genre.includes(genreFilter);
-      const lOk = lengthFilter === 'all' || w.length === lengthFilter;
-      return gOk && lOk;
-    })
-    .sort((a, b) => {
-      if (sortKey === 'date-desc') return new Date(b.publishedAt) - new Date(a.publishedAt);
-      if (sortKey === 'date-asc')  return new Date(a.publishedAt) - new Date(b.publishedAt);
-      if (sortKey === 'chars-desc') return b.charCount - a.charCount;
-      return a.charCount - b.charCount;
-    });
-}
-
-// 描画
-function render() {
-  const results = filterAndSort();
-  const grid  = document.getElementById('works-grid');
-  const empty = document.getElementById('empty');
-  document.getElementById('result-count').textContent = `${results.length} 件`;
-
-  if (results.length === 0) {
-    grid.style.display = 'none';
-    empty.style.display = 'block';
-    return;
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
   }
 
-  grid.style.display = 'grid';
-  empty.style.display = 'none';
+  function formatDate(d) {
+    return d ? d.replaceAll("-", ".") : "";
+  }
 
-  grid.innerHTML = results.map(w => `
-    <a class="work-card" href="${w.url}">
-      <div class="card-genre-row">
-        ${w.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}
-        <span class="length-tag">${LENGTH_LABEL[w.length] ?? w.length}</span>
-      </div>
-      <h2 class="card-title">${w.title}</h2>
-      <p class="card-desc">${w.description}</p>
-      <div class="card-meta">
-        <span>${w.publishedAt}</span>
-        <span>${w.charCount.toLocaleString()}字</span>
-      </div>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-  `).join('');
-}
+  function sortNovels(list, sort) {
+    const arr = list.slice();
+    switch (sort) {
+      case "date-asc":
+        arr.sort((a, b) => a.publishedDate.localeCompare(b.publishedDate));
+        break;
+      case "date-desc":
+        arr.sort((a, b) => b.publishedDate.localeCompare(a.publishedDate));
+        break;
+      case "length-asc":
+        arr.sort((a, b) => a.length - b.length);
+        break;
+      case "length-desc":
+        arr.sort((a, b) => b.length - a.length);
+        break;
+    }
+    return arr;
+  }
 
-// イベント
-document.getElementById('genre-select').addEventListener('change', e => {
-  genreFilter = e.target.value;
-  render();
-});
+  function render() {
+    const sorted = sortNovels(allNovels, currentSort);
+    const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+    currentPage = Math.min(Math.max(1, currentPage), totalPages);
 
-document.querySelectorAll('[data-filter-length]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('[data-filter-length]').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    lengthFilter = btn.dataset.filterLength;
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const pageItems = sorted.slice(start, start + PAGE_SIZE);
+
+    gridEl.innerHTML = "";
+
+    if (pageItems.length === 0) {
+      gridEl.innerHTML = '<p class="empty-msg">まだ小説がありません。</p>';
+    } else {
+      for (const n of pageItems) {
+        const a = document.createElement("a");
+        a.className = "novel-card";
+        a.href = `novel.html?id=${encodeURIComponent(n.id)}`;
+        const sheets = (n.length / 400).toFixed(1);
+        a.innerHTML = `
+          <h2>${escapeHtml(n.title)}</h2>
+          <div class="card-meta">
+            <span class="stamp-date">${formatDate(n.publishedDate)}</span>
+            <span class="stamp-length">${n.length.toLocaleString()}字<small>約${sheets}枚</small></span>
+          </div>`;
+        gridEl.appendChild(a);
+      }
+    }
+
+    resultCountEl.textContent = `全${allNovels.length}作 / ${currentPage} / ${totalPages}ページ`;
+
+    renderPagination(totalPages);
+    updateURL();
+  }
+
+  function renderPagination(totalPages) {
+    paginationEl.innerHTML = "";
+    if (totalPages <= 1) return;
+
+    const mkBtn = (label, page, disabled, active) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "page-btn" + (active ? " active" : "");
+      b.textContent = label;
+      b.disabled = !!disabled;
+      b.addEventListener("click", () => {
+        currentPage = page;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      return b;
+    };
+
+    paginationEl.appendChild(mkBtn("« 前へ", currentPage - 1, currentPage <= 1, false));
+    for (let p = 1; p <= totalPages; p++) {
+      paginationEl.appendChild(mkBtn(String(p), p, false, p === currentPage));
+    }
+    paginationEl.appendChild(mkBtn("次へ »", currentPage + 1, currentPage >= totalPages, false));
+  }
+
+  function updateURL() {
+    const params = new URLSearchParams();
+    params.set("sort", currentSort);
+    params.set("page", String(currentPage));
+    history.replaceState(null, "", `${location.pathname}?${params.toString()}`);
+  }
+
+  sortSelectEl.addEventListener("change", (e) => {
+    currentSort = e.target.value;
+    currentPage = 1;
     render();
   });
-});
 
-document.getElementById('sort-select').addEventListener('change', e => {
-  sortKey = e.target.value;
-  render();
-});
+  async function init() {
+    const params = new URLSearchParams(location.search);
+    currentSort = params.get("sort") || "date-desc";
+    currentPage = parseInt(params.get("page") || "1", 10) || 1;
+    sortSelectEl.value = currentSort;
+
+    try {
+      const res = await fetch(DATA_URL);
+      if (!res.ok) throw new Error("failed to load");
+      allNovels = await res.json();
+    } catch (e) {
+      gridEl.innerHTML = '<p class="empty-msg">一覧データの読み込みに失敗しました。ローカルで確認する場合は、簡易サーバー（例: python3 -m http.server）経由で開いてください。</p>';
+      return;
+    }
+    render();
+  }
+
+  init();
+})();

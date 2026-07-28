@@ -1,0 +1,81 @@
+(function () {
+  "use strict";
+
+  const container = document.getElementById("novelContainer");
+  const titleEl = document.getElementById("novelTitle");
+  const metaEl = document.getElementById("novelMeta");
+  const articleEl = document.getElementById("novelArticle");
+  const themeSection = document.getElementById("themeSection");
+  const themeBtn = document.getElementById("themeBtn");
+  const themeChips = document.getElementById("themeChips");
+  const yearEl = document.getElementById("yearSpan");
+
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+
+  function fmt(d) {
+    return d ? d.replaceAll("-", ".") : "";
+  }
+
+  function showError(message) {
+    container.innerHTML = `<p class="empty-msg" style="padding:3rem 1.5rem;">${escapeHtml(message)}</p>`;
+  }
+
+  function renderNovel(novel) {
+    document.title = `${novel.title} | 原稿棚`;
+    titleEl.textContent = novel.title;
+
+    const sheets = (novel.length / 400).toFixed(1);
+    const metaParts = [
+      `<span class="stamp-date">公開 ${fmt(novel.publishedDate)}</span>`,
+      `<span class="stamp-length">${novel.length.toLocaleString()}字<small>約${sheets}枚</small></span>`
+    ];
+    if (novel.createdDate) metaParts.push(`<span class="stamp-date-sub">作成 ${fmt(novel.createdDate)}</span>`);
+    if (novel.modifiedDate) metaParts.push(`<span class="stamp-date-sub">修正 ${fmt(novel.modifiedDate)}</span>`);
+    metaEl.innerHTML = metaParts.join(" ");
+
+    const body = Array.isArray(novel.body) ? novel.body : [];
+    articleEl.innerHTML = body.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+
+    if (Array.isArray(novel.themes) && novel.themes.length > 0) {
+      themeSection.style.display = "block";
+      themeChips.innerHTML = novel.themes.map((t) => `<span class="theme-chip">${escapeHtml(t)}</span>`).join("");
+      themeBtn.addEventListener("click", () => {
+        const nowHidden = themeChips.hasAttribute("hidden");
+        if (nowHidden) {
+          themeChips.removeAttribute("hidden");
+          themeBtn.textContent = "お題を隠す";
+        } else {
+          themeChips.setAttribute("hidden", "");
+          themeBtn.textContent = "お題を表示";
+        }
+      });
+    } else {
+      themeSection.style.display = "none";
+    }
+  }
+
+  async function init() {
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+    if (!id) {
+      showError("小説が指定されていません。一覧ページから選んでください。");
+      return;
+    }
+    try {
+      const res = await fetch(`data/novels/${encodeURIComponent(id)}.json`);
+      if (!res.ok) throw new Error("not found");
+      const novel = await res.json();
+      renderNovel(novel);
+    } catch (e) {
+      showError("指定された小説が見つかりませんでした。ローカルで確認する場合は、簡易サーバー（例: python3 -m http.server）経由で開いてください。");
+    }
+  }
+
+  init();
+})();
