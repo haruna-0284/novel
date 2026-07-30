@@ -31,9 +31,13 @@
       lineNo++;
       if (line.trim() === "") continue; // 空行は段落として扱わない
 
-      const startsWithFullwidthSpace = line[0] === "\u3000";
-      if (!startsWithFullwidthSpace && !startsWithOpenMark(line)) {
-        warnings.push({ type: "indent", lineNo, text: line });
+      const isHeading = /^#\s*/.test(line);
+
+      if (!isHeading) {
+        const startsWithFullwidthSpace = line[0] === "\u3000";
+        if (!startsWithFullwidthSpace && !startsWithOpenMark(line)) {
+          warnings.push({ type: "indent", lineNo, text: line });
+        }
       }
 
       const halfwidthMatches = line.match(/[A-Za-z0-9]/g);
@@ -48,7 +52,11 @@
   }
 
   function computeLength(paragraphs) {
-    return paragraphs.reduce((sum, p) => sum + p.length, 0);
+    return paragraphs.reduce((sum, p) => {
+      const headingMatch = /^#\s*(.*)$/.exec(p);
+      const text = headingMatch ? headingMatch[1] : p;
+      return sum + text.length;
+    }, 0);
   }
 
   function renderWarnings(warnings) {

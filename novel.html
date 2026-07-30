@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -25,18 +25,20 @@
 
   <article class="novel-article" id="novelArticle"></article>
 
-  <div class="theme-section" id="themeSection" style="display:none;">
-    <button class="theme-btn" id="themeBtn" type="button">お題を表示</button>
-    <div class="theme-chips" id="themeChips" hidden></div>
+  <div class="theme-reveal" id="themeReveal" hidden>
+    <div class="theme-chips" id="themeChips"></div>
   </div>
 </main>
 
-<a class="back-link" href="index.html">← 一覧にもどる</a>
+<div class="bottom-bar">
+  <a class="back-link" href="index.html">← 一覧にもどる</a>
+  <button class="theme-btn" id="themeBtn" type="button" hidden>お題を表示</button>
+</div>
 
 <footer class="site-footer">
   &copy; <span id="yearSpan"></span> ナマケモノ文庫
 </footer>
 
-<script src="js/novel.js?v=3"></script>
+<script src="js/novel.js?v=4"></script>
 </body>
 </html>

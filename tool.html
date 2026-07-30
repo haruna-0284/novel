@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -63,7 +63,8 @@
     <label for="rawTextInput" style="font-family:var(--font-mono); font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.5rem;">本文を貼り付け</label>
     <textarea id="rawTextInput" placeholder="ここに本文を貼り付けてください。1行＝1段落として扱います。"></textarea>
     <p class="field-hint" style="margin-top:0.5rem;">
-      チェック内容：①「」などの括弧で始まらない行の行頭に全角スペースの字下げがあるか　②半角の英数字が混ざっていないか
+      チェック内容：①「」などの括弧で始まらない行の行頭に全角スペースの字下げがあるか　②半角の英数字が混ざっていないか<br>
+      章タイトルにしたい行は、先頭に半角の「#」と半角スペースを付けてください（例：<code># 第一章　夜明け</code>）。個別ページで大きな見出しとして表示されます（字下げチェックの対象外・文字数にはカウントされません）。
     </p>
   </div>
 
@@ -95,6 +96,6 @@
   </div>
 </main>
 
-<script src="js/tool.js?v=3"></script>
+<script src="js/tool.js?v=4"></script>
 </body>
 </html>

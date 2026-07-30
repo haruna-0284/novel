@@ -1,476 +1,476 @@
 [
-{
-  "id": "novel-01",
-  "title": "宇宙の住人",
-  "publishedDate": "2026-07-28",
-  "length": 210
-},
-{
-  "id": "novel-02",
-  "title": "たこのたこ焼き屋",
-  "publishedDate": "2026-07-28",
-  "length": 296
-},
-{
-  "id": "novel-03",
-  "title": "そばが降る",
-  "publishedDate": "2026-07-28",
-  "length": 352
-},
-{
-  "id": "novel-04",
-  "title": "バカにつける薬",
-  "publishedDate": "2026-07-28",
-  "length": 273
-},
-{
-  "id": "novel-05",
-  "title": "地上げ屋",
-  "publishedDate": "2026-07-28",
-  "length": 286
-},
-{
-  "id": "novel-06",
-  "title": "海藻泥棒",
-  "publishedDate": "2026-07-28",
-  "length": 580
-},
-{
-  "id": "novel-07",
-  "title": "俺たち一発屋",
-  "publishedDate": "2026-07-28",
-  "length": 755
-},
-{
-  "id": "novel-08",
-  "title": "踊れ、おれ",
-  "publishedDate": "2026-07-28",
-  "length": 928
-},
-{
-  "id": "novel-09",
-  "title": "シエスタイムスリップ",
-  "publishedDate": "2026-07-28",
-  "length": 1000
-},
-{
-  "id": "novel-10",
-  "title": "高層階から",
-  "publishedDate": "2026-07-28",
-  "length": 1053
-},
-{
-  "id": "novel-11",
-  "title": "生き残れ！　車校",
-  "publishedDate": "2026-07-28",
-  "length": 667
-},
-{
-  "id": "novel-12",
-  "title": "手相を見るより",
-  "publishedDate": "2026-07-28",
-  "length": 120
-},
-{
-  "id": "novel-13",
-  "title": "真人間エキス",
-  "publishedDate": "2026-07-29",
-  "length": 673
-},
-{
-  "id": "novel-14",
-  "title": "君のキモチを小瓶につめて",
-  "publishedDate": "2026-07-29",
-  "length": 711
-},
-{
-  "id": "novel-15",
-  "title": "シフトと終電",
-  "publishedDate": "2026-07-29",
-  "length": 360
-},
-{
-  "id": "novel-16",
-  "title": "土中に",
-  "publishedDate": "2026-07-29",
-  "length": 276
-},
-{
-  "id": "novel-17",
-  "title": "おちゃのこさいさい",
-  "publishedDate": "2026-07-29",
-  "length": 955
-},
-{
-  "id": "novel-18",
-  "title": "シン・サメ映画の金字塔",
-  "publishedDate": "2026-07-29",
-  "length": 604
-},
-{
-  "id": "novel-19",
-  "title": "過去からカレー",
-  "publishedDate": "2026-07-29",
-  "length": 620
-},
-{
-  "id": "novel-20",
-  "title": "最大の選択！の巻",
-  "publishedDate": "2026-07-29",
-  "length": 624
-},
-{
-  "id": "novel-21",
-  "title": "新領土調査団",
-  "publishedDate": "2026-07-29",
-  "length": 598
-},
-{
-  "id": "novel-22",
-  "title": "サイボーグ兵器の戦後",
-  "publishedDate": "2026-07-29",
-  "length": 635
-},
-{
-  "id": "novel-23",
-  "title": "多浪だろう",
-  "publishedDate": "2026-07-29",
-  "length": 936
-},
-{
-  "id": "novel-24",
-  "title": "パンとキャンディーズ",
-  "publishedDate": "2026-07-29",
-  "length": 609
-},
-{
-  "id": "novel-25",
-  "title": "未解決問題は続く",
-  "publishedDate": "2026-07-29",
-  "length": 703
-},
-{
-  "id": "novel-26",
-  "title": "壁の中には",
-  "publishedDate": "2026-07-29",
-  "length": 917
-},
-{
-  "id": "novel-27",
-  "title": "幽霊部員だけ",
-  "publishedDate": "2026-07-29",
-  "length": 428
-},
-{
-  "id": "novel-28",
-  "title": "アスファルトde干物",
-  "publishedDate": "2026-07-29",
-  "length": 716
-},
-{
-  "id": "novel-29",
-  "title": "俺はハイウェイの疾風(かぜ)",
-  "publishedDate": "2026-07-29",
-  "length": 954
-},
-{
-  "id": "novel-30",
-  "title": "君もレモネードで大儲け！",
-  "publishedDate": "2026-07-29",
-  "length": 530
-},
-{
-  "id": "novel-31",
-  "title": "手打ちにしよう",
-  "publishedDate": "2026-07-29",
-  "length": 679
-},
-{
-  "id": "novel-32",
-  "title": "本日の主役",
-  "publishedDate": "2026-07-29",
-  "length": 612
-},
-{
-  "id": "novel-33",
-  "title": "アマゾネス忠臣蔵",
-  "publishedDate": "2026-07-29",
-  "length": 608
-},
-{
-  "id": "novel-34",
-  "title": "合否だゾウ",
-  "publishedDate": "2026-07-29",
-  "length": 479
-},
-{
-  "id": "novel-35",
-  "title": "人は見た目が九割くらい",
-  "publishedDate": "2026-07-29",
-  "length": 479
-},
-{
-  "id": "novel-36",
-  "title": "常に恐怖を！",
-  "publishedDate": "2026-07-29",
-  "length": 694
-},
-{
-  "id": "novel-37",
-  "title": "天使と悪魔の添削",
-  "publishedDate": "2026-07-29",
-  "length": 941
-},
-{
-  "id": "novel-38",
-  "title": "哺乳類最強",
-  "publishedDate": "2026-07-30",
-  "length": 956
-},
-{
-  "id": "novel-39",
-  "title": "『アレ』を回せ",
-  "publishedDate": "2026-07-30",
-  "length": 517
-},
-{
-  "id": "novel-40",
-  "title": "ドゥームズ・ゾンビ・デイ",
-  "publishedDate": "2026-07-30",
-  "length": 550
-},
-{
-  "id": "novel-41",
-  "title": "雪にこたつ",
-  "publishedDate": "2026-07-30",
-  "length": 454
-},
-{
-  "id": "novel-42",
-  "title": "良心比較",
-  "publishedDate": "2026-07-30",
-  "length": 2575
-},
-{
-  "id": "novel-43",
-  "title": "よい子のわくわく観察日記",
-  "publishedDate": "2026-07-30",
-  "length": 1096
-},
-{
-  "id": "novel-44",
-  "title": "三ヶ月分じゃ足りないわ",
-  "publishedDate": "2026-07-30",
-  "length": 1194
-},
-{
-  "id": "novel-45",
-  "title": "先生の神だのみ",
-  "publishedDate": "2026-07-30",
-  "length": 882
-},
-{
-  "id": "novel-46",
-  "title": "アメリカ縦断クイズ",
-  "publishedDate": "2026-07-30",
-  "length": 1223
-},
-{
-  "id": "novel-47",
-  "title": "火星人襲来",
-  "publishedDate": "2026-07-30",
-  "length": 1095
-},
-{
-  "id": "novel-48",
-  "title": "ようこそ、サンタさん",
-  "publishedDate": "2026-07-30",
-  "length": 685
-},
-{
-  "id": "novel-49",
-  "title": "ない写真、あります",
-  "publishedDate": "2026-07-30",
-  "length": 2021
-},
-{
-  "id": "novel-50",
-  "title": "健康を目指す会",
-  "publishedDate": "2026-07-30",
-  "length": 3088
-},
-{
-  "id": "novel-51",
-  "title": "ALIEN in HELL",
-  "publishedDate": "2026-07-30",
-  "length": 1362
-},
-{
-  "id": "novel-52",
-  "title": "お気楽内職ライフ",
-  "publishedDate": "2026-07-30",
-  "length": 1694
-},
-{
-  "id": "novel-53",
-  "title": "冠婚葬祭なんでもやります",
-  "publishedDate": "2026-07-30",
-  "length": 2438
-},
-{
-  "id": "novel-54",
-  "title": "片付けこれだけ！　スーパーバインダー",
-  "publishedDate": "2026-07-30",
-  "length": 1934
-},
-{
-  "id": "novel-55",
-  "title": "目指せ、数学金メダル",
-  "publishedDate": "2026-07-30",
-  "length": 1905
-},
-{
-  "id": "novel-56",
-  "title": "天丼から生活音がするんですよ。",
-  "publishedDate": "2026-07-30",
-  "length": 2021
-},
-{
-  "id": "novel-57",
-  "title": "おしゃべり大好き　肯定くん",
-  "publishedDate": "2026-07-30",
-  "length": 2817
-},
-{
-  "id": "novel-58",
-  "title": "対バンしよう！",
-  "publishedDate": "2026-07-30",
-  "length": 2745
-},
-{
-  "id": "novel-59",
-  "title": "クラスで作ろう脱法炊飯器",
-  "publishedDate": "2026-07-30",
-  "length": 3285
-},
-{
-  "id": "novel-60",
-  "title": "僕は知っている",
-  "publishedDate": "2026-07-30",
-  "length": 1844
-},
-{
-  "id": "novel-61",
-  "title": "俺は元洋楽派",
-  "publishedDate": "2026-07-30",
-  "length": 1833
-},
-{
-  "id": "novel-62",
-  "title": "バレンタインは期待して",
-  "publishedDate": "2026-07-30",
-  "length": 1397
-},
-{
-  "id": "novel-63",
-  "title": "最後のミサイル",
-  "publishedDate": "2026-07-30",
-  "length": 3466
-},
-{
-  "id": "novel-64",
-  "title": "デビュー記念サイン会",
-  "publishedDate": "2026-07-30",
-  "length": 1425
-},
-{
-  "id": "novel-65",
-  "title": "社長一代記",
-  "publishedDate": "2026-07-30",
-  "length": 4187
-},
-{
-  "id": "novel-66",
-  "title": "街頭インタビュー",
-  "publishedDate": "2026-07-30",
-  "length": 1215
-},
-{
-  "id": "novel-67",
-  "title": "動け、ロボットビル",
-  "publishedDate": "2026-07-30",
-  "length": 1642
-},
-{
-  "id": "novel-68",
-  "title": "偽ブランド品サイトの謎",
-  "publishedDate": "2026-07-30",
-  "length": 1361
-},
-{
-  "id": "novel-69",
-  "title": "匿名で大丈夫",
-  "publishedDate": "2026-07-30",
-  "length": 1102
-},
-{
-  "id": "novel-70",
-  "title": "初日の幽霊",
-  "publishedDate": "2026-07-30",
-  "length": 11003
-},
-{
-  "id": "novel-71",
-  "title": "選ばれた三匹",
-  "publishedDate": "2026-07-30",
-  "length": 1412
-},
-{
-  "id": "novel-72",
-  "title": "二人の絵描き",
-  "publishedDate": "2026-07-30",
-  "length": 1451
-},
-{
-  "id": "novel-73",
-  "title": "栄養バランス調整ふりかけ",
-  "publishedDate": "2026-07-30",
-  "length": 1708
-},
-{
-  "id": "novel-74",
-  "title": "ピイちゃん",
-  "publishedDate": "2026-07-30",
-  "length": 1611
-},
-{
-  "id": "novel-75",
-  "title": "あたしドミノ",
-  "publishedDate": "2026-07-30",
-  "length": 1989
-},
-{
-  "id": "novel-76",
-  "title": "古風なカノジョ",
-  "publishedDate": "2026-07-30",
-  "length": 859
-},
-{
-  "id": "novel-77",
-  "title": "かえとくれ",
-  "publishedDate": "2026-07-30",
-  "length": 2899
-},
-{
-  "id": "novel-78",
-  "title": "超能力開発",
-  "publishedDate": "2026-07-30",
-  "length": 2891
-},
-{
-  "id": "novel-79",
-  "title": "父の殺人",
-  "publishedDate": "2026-07-29",
-  "length": 1446
-}
+  {
+    "id": "novel-01",
+    "title": "宇宙の住人",
+    "publishedDate": "2026-07-28",
+    "length": 210
+  },
+  {
+    "id": "novel-02",
+    "title": "たこのたこ焼き屋",
+    "publishedDate": "2026-07-28",
+    "length": 296
+  },
+  {
+    "id": "novel-03",
+    "title": "そばが降る",
+    "publishedDate": "2026-07-28",
+    "length": 352
+  },
+  {
+    "id": "novel-04",
+    "title": "バカにつける薬",
+    "publishedDate": "2026-07-28",
+    "length": 273
+  },
+  {
+    "id": "novel-05",
+    "title": "地上げ屋",
+    "publishedDate": "2026-07-28",
+    "length": 286
+  },
+  {
+    "id": "novel-06",
+    "title": "海藻泥棒",
+    "publishedDate": "2026-07-28",
+    "length": 580
+  },
+  {
+    "id": "novel-07",
+    "title": "俺たち一発屋",
+    "publishedDate": "2026-07-28",
+    "length": 755
+  },
+  {
+    "id": "novel-08",
+    "title": "踊れ、おれ",
+    "publishedDate": "2026-07-28",
+    "length": 928
+  },
+  {
+    "id": "novel-09",
+    "title": "シエスタイムスリップ",
+    "publishedDate": "2026-07-28",
+    "length": 1000
+  },
+  {
+    "id": "novel-10",
+    "title": "高層階から",
+    "publishedDate": "2026-07-28",
+    "length": 1053
+  },
+  {
+    "id": "novel-11",
+    "title": "生き残れ！　車校",
+    "publishedDate": "2026-07-28",
+    "length": 667
+  },
+  {
+    "id": "novel-12",
+    "title": "手相を見るより",
+    "publishedDate": "2026-07-28",
+    "length": 120
+  },
+  {
+    "id": "novel-13",
+    "title": "真人間エキス",
+    "publishedDate": "2026-07-29",
+    "length": 673
+  },
+  {
+    "id": "novel-14",
+    "title": "君のキモチを小瓶につめて",
+    "publishedDate": "2026-07-29",
+    "length": 711
+  },
+  {
+    "id": "novel-15",
+    "title": "シフトと終電",
+    "publishedDate": "2026-07-29",
+    "length": 360
+  },
+  {
+    "id": "novel-16",
+    "title": "土中に",
+    "publishedDate": "2026-07-29",
+    "length": 276
+  },
+  {
+    "id": "novel-17",
+    "title": "おちゃのこさいさい",
+    "publishedDate": "2026-07-29",
+    "length": 955
+  },
+  {
+    "id": "novel-18",
+    "title": "シン・サメ映画の金字塔",
+    "publishedDate": "2026-07-29",
+    "length": 604
+  },
+  {
+    "id": "novel-19",
+    "title": "過去からカレー",
+    "publishedDate": "2026-07-29",
+    "length": 620
+  },
+  {
+    "id": "novel-20",
+    "title": "最大の選択！の巻",
+    "publishedDate": "2026-07-29",
+    "length": 624
+  },
+  {
+    "id": "novel-21",
+    "title": "新領土調査団",
+    "publishedDate": "2026-07-29",
+    "length": 598
+  },
+  {
+    "id": "novel-22",
+    "title": "サイボーグ兵器の戦後",
+    "publishedDate": "2026-07-29",
+    "length": 635
+  },
+  {
+    "id": "novel-23",
+    "title": "多浪だろう",
+    "publishedDate": "2026-07-29",
+    "length": 936
+  },
+  {
+    "id": "novel-24",
+    "title": "パンとキャンディーズ",
+    "publishedDate": "2026-07-29",
+    "length": 609
+  },
+  {
+    "id": "novel-25",
+    "title": "未解決問題は続く",
+    "publishedDate": "2026-07-29",
+    "length": 703
+  },
+  {
+    "id": "novel-26",
+    "title": "壁の中には",
+    "publishedDate": "2026-07-29",
+    "length": 917
+  },
+  {
+    "id": "novel-27",
+    "title": "幽霊部員だけ",
+    "publishedDate": "2026-07-29",
+    "length": 428
+  },
+  {
+    "id": "novel-28",
+    "title": "アスファルトde干物",
+    "publishedDate": "2026-07-29",
+    "length": 716
+  },
+  {
+    "id": "novel-29",
+    "title": "俺はハイウェイの疾風(かぜ)",
+    "publishedDate": "2026-07-29",
+    "length": 954
+  },
+  {
+    "id": "novel-30",
+    "title": "君もレモネードで大儲け！",
+    "publishedDate": "2026-07-29",
+    "length": 530
+  },
+  {
+    "id": "novel-31",
+    "title": "手打ちにしよう",
+    "publishedDate": "2026-07-29",
+    "length": 679
+  },
+  {
+    "id": "novel-32",
+    "title": "本日の主役",
+    "publishedDate": "2026-07-29",
+    "length": 612
+  },
+  {
+    "id": "novel-33",
+    "title": "アマゾネス忠臣蔵",
+    "publishedDate": "2026-07-29",
+    "length": 608
+  },
+  {
+    "id": "novel-34",
+    "title": "合否だゾウ",
+    "publishedDate": "2026-07-29",
+    "length": 479
+  },
+  {
+    "id": "novel-35",
+    "title": "人は見た目が九割くらい",
+    "publishedDate": "2026-07-29",
+    "length": 479
+  },
+  {
+    "id": "novel-36",
+    "title": "常に恐怖を！",
+    "publishedDate": "2026-07-29",
+    "length": 694
+  },
+  {
+    "id": "novel-37",
+    "title": "天使と悪魔の添削",
+    "publishedDate": "2026-07-29",
+    "length": 941
+  },
+  {
+    "id": "novel-38",
+    "title": "哺乳類最強",
+    "publishedDate": "2026-07-30",
+    "length": 956
+  },
+  {
+    "id": "novel-39",
+    "title": "『アレ』を回せ",
+    "publishedDate": "2026-07-30",
+    "length": 517
+  },
+  {
+    "id": "novel-40",
+    "title": "ドゥームズ・ゾンビ・デイ",
+    "publishedDate": "2026-07-30",
+    "length": 550
+  },
+  {
+    "id": "novel-41",
+    "title": "雪にこたつ",
+    "publishedDate": "2026-07-30",
+    "length": 454
+  },
+  {
+    "id": "novel-42",
+    "title": "良心比較",
+    "publishedDate": "2026-07-30",
+    "length": 2575
+  },
+  {
+    "id": "novel-43",
+    "title": "よい子のわくわく観察日記",
+    "publishedDate": "2026-07-30",
+    "length": 1096
+  },
+  {
+    "id": "novel-44",
+    "title": "三ヶ月分じゃ足りないわ",
+    "publishedDate": "2026-07-30",
+    "length": 1194
+  },
+  {
+    "id": "novel-45",
+    "title": "先生の神だのみ",
+    "publishedDate": "2026-07-30",
+    "length": 882
+  },
+  {
+    "id": "novel-46",
+    "title": "アメリカ縦断クイズ",
+    "publishedDate": "2026-07-30",
+    "length": 1223
+  },
+  {
+    "id": "novel-47",
+    "title": "火星人襲来",
+    "publishedDate": "2026-07-30",
+    "length": 1095
+  },
+  {
+    "id": "novel-48",
+    "title": "ようこそ、サンタさん",
+    "publishedDate": "2026-07-30",
+    "length": 685
+  },
+  {
+    "id": "novel-49",
+    "title": "ない写真、あります",
+    "publishedDate": "2026-07-30",
+    "length": 2021
+  },
+  {
+    "id": "novel-50",
+    "title": "健康を目指す会",
+    "publishedDate": "2026-07-30",
+    "length": 3088
+  },
+  {
+    "id": "novel-51",
+    "title": "ALIEN in HELL",
+    "publishedDate": "2026-07-30",
+    "length": 1362
+  },
+  {
+    "id": "novel-52",
+    "title": "お気楽内職ライフ",
+    "publishedDate": "2026-07-30",
+    "length": 1694
+  },
+  {
+    "id": "novel-53",
+    "title": "冠婚葬祭なんでもやります",
+    "publishedDate": "2026-07-30",
+    "length": 2438
+  },
+  {
+    "id": "novel-54",
+    "title": "片付けこれだけ！　スーパーバインダー",
+    "publishedDate": "2026-07-30",
+    "length": 1934
+  },
+  {
+    "id": "novel-55",
+    "title": "目指せ、数学金メダル",
+    "publishedDate": "2026-07-30",
+    "length": 1905
+  },
+  {
+    "id": "novel-56",
+    "title": "天丼から生活音がするんですよ。",
+    "publishedDate": "2026-07-30",
+    "length": 2021
+  },
+  {
+    "id": "novel-57",
+    "title": "おしゃべり大好き　肯定くん",
+    "publishedDate": "2026-07-30",
+    "length": 2817
+  },
+  {
+    "id": "novel-58",
+    "title": "対バンしよう！",
+    "publishedDate": "2026-07-30",
+    "length": 2745
+  },
+  {
+    "id": "novel-59",
+    "title": "クラスで作ろう脱法炊飯器",
+    "publishedDate": "2026-07-30",
+    "length": 3285
+  },
+  {
+    "id": "novel-60",
+    "title": "僕は知っている",
+    "publishedDate": "2026-07-30",
+    "length": 1844
+  },
+  {
+    "id": "novel-61",
+    "title": "俺は元洋楽派",
+    "publishedDate": "2026-07-30",
+    "length": 1833
+  },
+  {
+    "id": "novel-62",
+    "title": "バレンタインは期待して",
+    "publishedDate": "2026-07-30",
+    "length": 1397
+  },
+  {
+    "id": "novel-63",
+    "title": "最後のミサイル",
+    "publishedDate": "2026-07-30",
+    "length": 3466
+  },
+  {
+    "id": "novel-64",
+    "title": "デビュー記念サイン会",
+    "publishedDate": "2026-07-30",
+    "length": 1425
+  },
+  {
+    "id": "novel-65",
+    "title": "社長一代記",
+    "publishedDate": "2026-07-30",
+    "length": 4187
+  },
+  {
+    "id": "novel-66",
+    "title": "街頭インタビュー",
+    "publishedDate": "2026-07-30",
+    "length": 1215
+  },
+  {
+    "id": "novel-67",
+    "title": "動け、ロボットビル",
+    "publishedDate": "2026-07-30",
+    "length": 1642
+  },
+  {
+    "id": "novel-68",
+    "title": "偽ブランド品サイトの謎",
+    "publishedDate": "2026-07-30",
+    "length": 1361
+  },
+  {
+    "id": "novel-69",
+    "title": "匿名で大丈夫",
+    "publishedDate": "2026-07-30",
+    "length": 1102
+  },
+  {
+    "id": "novel-70",
+    "title": "初日の幽霊",
+    "publishedDate": "2026-07-30",
+    "length": 11003
+  },
+  {
+    "id": "novel-71",
+    "title": "選ばれた三匹",
+    "publishedDate": "2026-07-30",
+    "length": 1412
+  },
+  {
+    "id": "novel-72",
+    "title": "二人の絵描き",
+    "publishedDate": "2026-07-30",
+    "length": 1451
+  },
+  {
+    "id": "novel-73",
+    "title": "栄養バランス調整ふりかけ",
+    "publishedDate": "2026-07-30",
+    "length": 1708
+  },
+  {
+    "id": "novel-74",
+    "title": "ピイちゃん",
+    "publishedDate": "2026-07-30",
+    "length": 1611
+  },
+  {
+    "id": "novel-75",
+    "title": "あたしドミノ",
+    "publishedDate": "2026-07-30",
+    "length": 1989
+  },
+  {
+    "id": "novel-76",
+    "title": "古風なカノジョ",
+    "publishedDate": "2026-07-30",
+    "length": 859
+  },
+  {
+    "id": "novel-77",
+    "title": "かえとくれ",
+    "publishedDate": "2026-07-30",
+    "length": 2899
+  },
+  {
+    "id": "novel-78",
+    "title": "超能力開発",
+    "publishedDate": "2026-07-30",
+    "length": 2891
+  },
+  {
+    "id": "novel-79",
+    "title": "父の殺人",
+    "publishedDate": "2026-07-29",
+    "length": 1446
+  }
 ]

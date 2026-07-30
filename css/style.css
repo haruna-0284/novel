@@ -57,7 +57,8 @@ button, select, input, textarea {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--paper);
+  background: var(--ink);
+  color: var(--paper);
   border-bottom: var(--border-w) solid var(--ink);
   display: flex;
   align-items: center;
@@ -73,6 +74,7 @@ button, select, input, textarea {
   font-size: 1.3rem;
   text-decoration: none;
   letter-spacing: 0.02em;
+  color: var(--paper);
 }
 
 .site-title small {
@@ -80,7 +82,8 @@ button, select, input, textarea {
   font-family: var(--font-mono);
   font-weight: 400;
   font-size: 0.65rem;
-  color: var(--brown);
+  color: var(--paper);
+  opacity: 0.7;
   letter-spacing: 0.05em;
   margin-top: 0.15rem;
 }
@@ -93,20 +96,20 @@ button, select, input, textarea {
   text-decoration: none;
   color: var(--ink);
   background: var(--yellow);
-  border: 2px solid var(--ink);
+  border: 2px solid var(--paper);
   padding: 0.4rem 0.8rem;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 3px 3px 0 var(--paper);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   white-space: nowrap;
 }
 .author-link:hover,
 .author-link:focus-visible {
   transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--paper);
 }
 .author-link:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--ink);
+  box-shadow: 1px 1px 0 var(--paper);
 }
 
 /* ---------- 並び替えバー ---------- */
@@ -269,13 +272,23 @@ button, select, input, textarea {
   color: var(--brown);
 }
 
+.bottom-bar {
+  max-width: 38em;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
 .back-link {
-  display: inline-block;
-  margin: 1.5rem;
+  justify-self: start;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   text-decoration: none;
   border-bottom: 2px solid var(--ink);
+  white-space: nowrap;
 }
 
 /* ---------- 個別小説ページ ---------- */
@@ -312,17 +325,42 @@ button, select, input, textarea {
 }
 
 .novel-article p {
-  margin: 0 0 1.15em;
+  margin: 0 0 0.35em;
 }
 
-.theme-section {
+.chapter-heading {
+  margin: 2.6rem 0 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.25rem, 3.2vw, 1.6rem);
+  line-height: 1.5;
+}
+
+.chapter-heading:first-child { margin-top: 0; }
+
+.theme-reveal {
   max-width: 38em;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
-  text-align: center;
+  padding: 1.4rem 1.5rem 0;
+}
+
+.theme-reveal[hidden] { display: none; }
+
+.theme-reveal .theme-chips {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.theme-reveal.visible .theme-chips {
+  visibility: visible;
+  opacity: 1;
 }
 
 .theme-btn {
+  justify-self: center;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.95rem;
@@ -332,7 +370,10 @@ button, select, input, textarea {
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+  white-space: nowrap;
 }
+
+.theme-btn[hidden] { display: none; }
 
 .theme-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
 
@@ -346,10 +387,7 @@ button, select, input, textarea {
   align-items: stretch;
   gap: 0.5rem;
   flex-wrap: nowrap;
-  margin-top: 1.6rem;
 }
-
-.theme-chips[hidden] { display: none; }
 
 .theme-chip {
   flex: 1 1 0;
@@ -573,5 +611,5 @@ textarea#rawTextInput {
 }
 
 @media (max-width: 600px) {
-  .novel-header, .novel-article, .theme-section { padding-left: 1.1rem; padding-right: 1.1rem; }
+  .novel-header, .novel-article, .theme-reveal, .bottom-bar { padding-left: 1.1rem; padding-right: 1.1rem; }
 }

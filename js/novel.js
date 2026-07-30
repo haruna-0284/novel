@@ -5,7 +5,7 @@
   const titleEl = document.getElementById("novelTitle");
   const metaEl = document.getElementById("novelMeta");
   const articleEl = document.getElementById("novelArticle");
-  const themeSection = document.getElementById("themeSection");
+  const themeReveal = document.getElementById("themeReveal");
   const themeBtn = document.getElementById("themeBtn");
   const themeChips = document.getElementById("themeChips");
   const yearEl = document.getElementById("yearSpan");
@@ -39,23 +39,27 @@
     metaEl.innerHTML = metaParts.join(" ");
 
     const body = Array.isArray(novel.body) ? novel.body : [];
-    articleEl.innerHTML = body.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+    articleEl.innerHTML = body
+      .map((line) => {
+        const headingMatch = /^#\s*(.*)$/.exec(line);
+        if (headingMatch) {
+          return `<h2 class="chapter-heading">${escapeHtml(headingMatch[1])}</h2>`;
+        }
+        return `<p>${escapeHtml(line)}</p>`;
+      })
+      .join("");
 
     if (Array.isArray(novel.themes) && novel.themes.length > 0) {
-      themeSection.style.display = "block";
+      themeReveal.hidden = false;
+      themeBtn.hidden = false;
       themeChips.innerHTML = novel.themes.map((t) => `<span class="theme-chip">${escapeHtml(t)}</span>`).join("");
       themeBtn.addEventListener("click", () => {
-        const nowHidden = themeChips.hasAttribute("hidden");
-        if (nowHidden) {
-          themeChips.removeAttribute("hidden");
-          themeBtn.textContent = "お題を隠す";
-        } else {
-          themeChips.setAttribute("hidden", "");
-          themeBtn.textContent = "お題を表示";
-        }
+        const nowVisible = themeReveal.classList.toggle("visible");
+        themeBtn.textContent = nowVisible ? "お題を隠す" : "お題を表示";
       });
     } else {
-      themeSection.style.display = "none";
+      themeReveal.hidden = true;
+      themeBtn.hidden = true;
     }
   }
 
