@@ -27,7 +27,7 @@
   }
 
   function renderNovel(novel) {
-    document.title = `${novel.title} | 原稿棚`;
+    document.title = `${novel.title} | ナマケモノ文庫`;
     titleEl.textContent = novel.title;
 
     const metaParts = [

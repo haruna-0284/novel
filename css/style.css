@@ -14,6 +14,7 @@
   --red: #D7263D;
   --blue: #1E5AA8;
   --yellow: #F2B705;
+  --green: #1E8A4A;
 
   --border-w: 3px;
   --shadow: 6px 6px 0 var(--ink);
@@ -343,8 +344,8 @@ button, select, input, textarea {
 .theme-chips {
   display: flex;
   align-items: stretch;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
   margin-top: 1.6rem;
 }
 
@@ -352,22 +353,24 @@ button, select, input, textarea {
 
 .theme-chip {
   flex: 1 1 0;
-  min-width: 6rem;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.9rem;
-  padding: 0.8rem 1rem;
+  font-size: clamp(0.7rem, 3vw, 0.9rem);
+  padding: 0.7rem 0.5rem;
   border: 2px solid var(--ink);
   color: var(--paper);
   text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .theme-chip:nth-child(3n+1) { background: var(--red); }
 .theme-chip:nth-child(3n+2) { background: var(--blue); }
-.theme-chip:nth-child(3n+3) { background: var(--ink); }
+.theme-chip:nth-child(3n+3) { background: var(--green); }
 
 /* ---------- ツールページ ---------- */
 

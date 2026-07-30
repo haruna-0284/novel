@@ -26,14 +26,19 @@
     return d ? d.replaceAll("-", ".") : "";
   }
 
+  function extractIdNumber(id) {
+    const match = /(\d+)/.exec(id || "");
+    return match ? parseInt(match[1], 10) : 0;
+  }
+
   function sortNovels(list, sort) {
     const arr = list.slice();
     switch (sort) {
       case "date-asc":
-        arr.sort((a, b) => a.publishedDate.localeCompare(b.publishedDate));
+        arr.sort((a, b) => extractIdNumber(a.id) - extractIdNumber(b.id));
         break;
       case "date-desc":
-        arr.sort((a, b) => b.publishedDate.localeCompare(a.publishedDate));
+        arr.sort((a, b) => extractIdNumber(b.id) - extractIdNumber(a.id));
         break;
       case "length-asc":
         arr.sort((a, b) => a.length - b.length);
