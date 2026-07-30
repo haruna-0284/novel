@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -30,9 +30,9 @@
       <input type="text" id="titleInput" placeholder="夜空の騎士">
     </div>
     <div class="field">
-      <label for="idInput">ID（ファイル名になります）</label>
-      <input type="text" id="idInput" placeholder="yozora-no-kishi">
-      <span class="field-hint">半角英数字とハイフンのみ</span>
+      <label for="idNumberInput">ID（連番）</label>
+      <input type="number" id="idNumberInput" min="1" step="1" placeholder="1">
+      <span class="field-hint">自動的に「<span id="idPreview">novel-01</span>」の形式になります</span>
     </div>
   </div>
 
@@ -95,6 +95,6 @@
   </div>
 </main>
 
-<script src="js/tool.js?v=2"></script>
+<script src="js/tool.js?v=3"></script>
 </body>
 </html>

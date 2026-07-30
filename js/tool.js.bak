@@ -15,10 +15,8 @@
     }[c]));
   }
 
-  function buildIdFromNumber(numStr) {
-    const num = parseInt(numStr, 10);
-    if (!numStr || isNaN(num) || num < 1) return null;
-    return `novel-${String(num).padStart(2, "0")}`;
+  function idIsValid(id) {
+    return /^[a-z0-9\-]+$/.test(id);
   }
 
   function validateAndBuildParagraphs(raw) {
@@ -93,8 +91,7 @@
 
   document.getElementById("processBtn").addEventListener("click", () => {
     const title = getFieldValue("titleInput").trim();
-    const idNumberRaw = getFieldValue("idNumberInput").trim();
-    const id = buildIdFromNumber(idNumberRaw);
+    const id = getFieldValue("idInput").trim();
     const createdDate = getFieldValue("createdDateInput");
     const publishedDate = getFieldValue("publishedDateInput");
     const modifiedDate = getFieldValue("modifiedDateInput");
@@ -103,7 +100,7 @@
 
     const errors = [];
     if (!title) errors.push("タイトルを入力してください。");
-    if (!id) errors.push("ID（連番）に1以上の数字を入力してください。");
+    if (!id || !idIsValid(id)) errors.push("IDは半角英数字とハイフンのみで入力してください。");
     if (!publishedDate) errors.push("公開日を入力してください。");
     if (!raw.trim()) errors.push("本文を貼り付けてください。");
 
@@ -157,13 +154,4 @@
       setTimeout(() => (btn.textContent = orig), 1500);
     });
   });
-
-  const idNumberInput = document.getElementById("idNumberInput");
-  const idPreview = document.getElementById("idPreview");
-  if (idNumberInput && idPreview) {
-    idNumberInput.addEventListener("input", () => {
-      const built = buildIdFromNumber(idNumberInput.value.trim());
-      idPreview.textContent = built || "novel-01";
-    });
-  }
 })();
