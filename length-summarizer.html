@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>作品文字数集計ツール</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --card: #ffffff;
+    --border: #ddd8cc;
+    --text: #2c2c2a;
+    --text-sub: #6a6862;
+    --accent: #b5651d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 2rem 1rem;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
+  p.sub { color: var(--text-sub); margin-top: 0; font-size: 0.9rem; }
+  .dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: var(--card);
+    cursor: pointer;
+    margin: 1.2rem 0;
+    transition: border-color .15s;
+  }
+  .dropzone.drag { border-color: var(--accent); }
+  .dropzone input { display: none; }
+  .dropzone .filename { font-size: 0.85rem; color: var(--text-sub); margin-top: 0.4rem; }
+  textarea {
+    width: 100%; min-height: 90px; font-family: monospace; font-size: 0.8rem;
+    border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem;
+    background: var(--card); color: var(--text); resize: vertical;
+  }
+  .or { text-align: center; color: var(--text-sub); font-size: 0.8rem; margin: 0.5rem 0; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 1.5rem 0; }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem; text-align: center;
+  }
+  .card .label { font-size: 0.75rem; color: var(--text-sub); margin-bottom: 4px; }
+  .card .value { font-size: 1.5rem; font-weight: 600; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; font-size: 0.85rem; }
+  th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--text-sub); font-weight: 500; }
+  .error { color: #b3261e; font-size: 0.85rem; margin-top: 0.5rem; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>作品文字数集計ツール</h1>
+  <p class="sub">JSONファイルを読み込むと、length の合計・件数・平均などを表示します。更新したファイルを読み込み直せば、その都度再集計されます。</p>
+
+  <div class="dropzone" id="dropzone">
+    <div>ここにJSONファイルをドラッグ＆ドロップ、またはクリックして選択</div>
+    <div class="filename" id="filename"></div>
+    <input type="file" id="fileInput" accept=".json,application/json">
+  </div>
+
+  <div class="or">または貼り付け</div>
+  <textarea id="pasteArea" placeholder='[{"id":"novel-01","title":"...","length":210}, ...] をここに貼り付け'></textarea>
+
+  <div class="error hidden" id="errorBox"></div>
+
+  <div id="results" class="hidden">
+    <div class="cards">
+      <div class="card"><div class="label">作品数</div><div class="value" id="statCount">0</div></div>
+      <div class="card"><div class="label">合計文字数</div><div class="value" id="statSum">0</div></div>
+      <div class="card"><div class="label">平均文字数</div><div class="value" id="statAvg">0</div></div>
+      <div class="card"><div class="label">最大 / 最小</div><div class="value" id="statMinMax" style="font-size:1.1rem">-</div></div>
+    </div>
+    <table>
+      <thead><tr><th>公開日</th><th>件数</th><th>合計文字数</th></tr></thead>
+      <tbody id="byDateBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const pasteArea = document.getElementById('pasteArea');
+const filenameEl = document.getElementById('filename');
+const errorBox = document.getElementById('errorBox');
+const results = document.getElementById('results');
+
+function showError(msg) {
+  errorBox.textContent = msg;
+  errorBox.classList.remove('hidden');
+  results.classList.add('hidden');
+}
+
+function process(jsonText, label) {
+  let data;
+  try {
+    data = JSON.parse(jsonText);
+  } catch (e) {
+    showError('JSONの解析に失敗しました: ' + e.message);
+    return;
+  }
+  if (!Array.isArray(data)) {
+    showError('JSONは配列である必要があります。');
+    return;
+  }
+  errorBox.classList.add('hidden');
+  if (label) filenameEl.textContent = label;
+
+  const lengths = data.map(d => Number(d.length) || 0);
+  const count = data.length;
+  const sum = lengths.reduce((a, b) => a + b, 0);
+  const avg = count ? Math.round(sum / count) : 0;
+  const max = count ? Math.max(...lengths) : 0;
+  const min = count ? Math.min(...lengths) : 0;
+
+  document.getElementById('statCount').textContent = count.toLocaleString();
+  document.getElementById('statSum').textContent = sum.toLocaleString();
+  document.getElementById('statAvg').textContent = avg.toLocaleString();
+  document.getElementById('statMinMax').textContent = max.toLocaleString() + ' / ' + min.toLocaleString();
+
+  const byDate = {};
+  data.forEach(d => {
+    const key = d.publishedDate || '不明';
+    if (!byDate[key]) byDate[key] = { count: 0, sum: 0 };
+    byDate[key].count += 1;
+    byDate[key].sum += Number(d.length) || 0;
+  });
+  const tbody = document.getElementById('byDateBody');
+  tbody.innerHTML = '';
+  Object.keys(byDate).sort().forEach(date => {
+    const row = byDate[date];
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${date}</td><td>${row.count.toLocaleString()}</td><td>${row.sum.toLocaleString()}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  results.classList.remove('hidden');
+}
+
+function handleFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => process(e.target.result, file.name);
+  reader.onerror = () => showError('ファイルの読み込みに失敗しました。');
+  reader.readAsText(file);
+}
+
+dropzone.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length) handleFile(fileInput.files[0]);
+});
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('drag');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+pasteArea.addEventListener('input', () => {
+  if (pasteArea.value.trim()) process(pasteArea.value, '(貼り付けたテキスト)');
+});
+</script>
+</body>
+</html>

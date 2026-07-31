@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小説整形ツール</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #fffffe;
+    --surface2: #f0ede6;
+    --border: #d8d3c8;
+    --border2: #c4bfb4;
+    --text: #1a1814;
+    --text2: #5c574e;
+    --text3: #8a8278;
+    --accent: #3d6b4f;
+    --accent-light: #e8f2eb;
+    --indent-bg: #d0cfc8;
+    --indent-text: #6b6760;
+    --alpha-bg: #d0eaf5;
+    --alpha-text: #1a5070;
+    --num-bg: #fde8c8;
+    --num-text: #7a4010;
+    --space-bg: #e8d8f5;
+    --space-text: #4a2070;
+    --font-jp: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+    --font-ui: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  .app-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .app-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .panel-header {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  textarea {
+    width: 100%;
+    min-height: 480px;
+    padding: 16px;
+    font-family: var(--font-jp);
+    font-size: 15px;
+    line-height: 2;
+    border: none;
+    outline: none;
+    resize: vertical;
+    background: var(--surface);
+    color: var(--text);
+  }
+  textarea::placeholder {
+    color: var(--text3);
+    font-size: 14px;
+  }
+  .output-area {
+    min-height: 480px;
+    padding: 16px;
+    font-family: var(--font-jp);
+    font-size: 15px;
+    line-height: 2;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-y: auto;
+  }
+  .output-area .line { display: inline; }
+  .mark-indent {
+    display: inline-block;
+    width: 1em;
+    background: var(--indent-bg);
+    color: var(--indent-text);
+    border-radius: 2px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.8;
+    font-family: var(--font-ui);
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .mark-alpha {
+    background: var(--alpha-bg);
+    color: var(--alpha-text);
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .mark-num {
+    background: var(--num-bg);
+    color: var(--num-text);
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .mark-space {
+    background: var(--space-bg);
+    color: var(--space-text);
+    border-radius: 2px;
+    padding: 0 1px;
+    font-size: 11px;
+    font-family: var(--font-ui);
+  }
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+    align-items: center;
+  }
+  button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 9px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-ui);
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  button:hover { opacity: 0.85; }
+  button.secondary {
+    background: var(--surface);
+    color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+  button.secondary:hover { background: var(--surface2); }
+  .copy-btn {
+    background: var(--surface);
+    color: var(--text2);
+    border: 1px solid var(--border2);
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+  .copy-btn:hover { background: var(--surface2); }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text2);
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+    font-size: 9px;
+    text-align: center;
+    line-height: 16px;
+  }
+  .swatch-indent { background: var(--indent-bg); color: var(--indent-text); }
+  .swatch-alpha  { background: var(--alpha-bg);  color: var(--alpha-text); }
+  .swatch-num    { background: var(--num-bg);    color: var(--num-text); }
+  .swatch-space  { background: var(--space-bg);  color: var(--space-text); }
+  .copy-msg {
+    font-size: 12px;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin-left: 4px;
+  }
+  .copy-msg.show { opacity: 1; }
+  @media (max-width: 800px) {
+    body { padding: 1rem; }
+    .layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-title">小説縦書き整形ツール</div>
+
+<div class="layout">
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        入力
+        <button class="secondary" onclick="clearInput()" style="padding:4px 10px;font-size:11px;">クリア</button>
+      </div>
+      <textarea id="input" placeholder="ここに本文を貼り付けてください&#10;&#10;例：&#10;彼女は窓の外を見た。&#10;「おはよう」と彼は言った。&#10;1990年3月25日のことだった。"></textarea>
+    </div>
+    <div class="actions">
+      <button onclick="format()">整形する</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        整形後（変更箇所をカラー表示）
+        <button class="copy-btn" onclick="copyText()">コピー</button>
+      </div>
+      <div id="output" class="output-area"><span style="color:var(--text3);font-size:13px;">「整形する」ボタンを押すと結果が表示されます</span></div>
+    </div>
+    <span class="copy-msg" id="copy-msg">コピーしました</span>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <span class="legend-swatch swatch-indent">　</span>一字下げ追加
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch swatch-alpha">Ａ</span>半角英字→全角
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch swatch-num">一</span>半角数字→漢数字
+  </div>
+  <div class="legend-item">
+    <span class="legend-swatch swatch-space">　</span>！？後スペース追加
+  </div>
+</div>
+
+<script>
+const OPEN_BRACKETS = '「『（【〔〈《';
+
+function toFullWidth(str) {
+  return str.replace(/[A-Za-z]/g, c => String.fromCharCode(c.charCodeAt(0) + 0xFEE0));
+}
+
+function toKanji(n) {
+  if (n === 0) return '〇';
+  const digits = ['〇','一','二','三','四','五','六','七','八','九'];
+  const units  = ['','十','百','千'];
+  const bigU   = ['','万','億','兆'];
+  let result = '';
+  const groups = [];
+  let tmp = n;
+  while (tmp > 0) { groups.push(tmp % 10000); tmp = Math.floor(tmp / 10000); }
+  for (let g = groups.length - 1; g >= 0; g--) {
+    const v = groups[g];
+    if (v === 0) continue;
+    let s = '';
+    const d3 = Math.floor(v / 1000);
+    const d2 = Math.floor((v % 1000) / 100);
+    const d1 = Math.floor((v % 100) / 10);
+    const d0 = v % 10;
+    if (d3) s += (d3 === 1 ? '' : digits[d3]) + '千';
+    if (d2) s += (d2 === 1 ? '' : digits[d2]) + '百';
+    if (d1) s += (d1 === 1 ? '' : digits[d1]) + '十';
+    if (d0) s += digits[d0];
+    result += s + bigU[g];
+  }
+  return result;
+}
+
+function processLine(line) {
+  if (line.trim() === '') return { html: '\n', plain: '\n', isBlank: true };
+
+  let html  = '';
+  let plain = '';
+  let modified = line;
+
+  const startsWithBracket = OPEN_BRACKETS.includes(line[0]);
+  const hasFullWidthSpace  = line[0] === '　';
+  const endsWithKuten      = line[line.length - 1] === '。';
+
+  let needsIndent = false;
+  if (!startsWithBracket && !hasFullWidthSpace) {
+    needsIndent = true;
+  } else if (startsWithBracket && endsWithKuten) {
+    needsIndent = true;
+  }
+
+  if (needsIndent) {
+    html  += '<span class="mark-indent" title="一字下げ追加">□</span>';
+    plain += '　';
+  }
+
+  let i = 0;
+  while (i < line.length) {
+    const numMatch = line.slice(i).match(/^[0-9]+/);
+    if (numMatch) {
+      const kanji = toKanji(parseInt(numMatch[0], 10));
+      html  += `<span class="mark-num" title="半角数字→漢数字">${kanji}</span>`;
+      plain += kanji;
+      i += numMatch[0].length;
+      continue;
+    }
+    const alphaMatch = line.slice(i).match(/^[A-Za-z]+/);
+    if (alphaMatch) {
+      const full = toFullWidth(alphaMatch[0]);
+      html  += `<span class="mark-alpha" title="半角英字→全角">${full}</span>`;
+      plain += full;
+      i += alphaMatch[0].length;
+      continue;
+    }
+    const ch = line[i];
+    if ((ch === '！' || ch === '？') && line[i + 1] && line[i + 1] !== '　' && line[i + 1] !== '！' && line[i + 1] !== '？' && line[i + 1] !== '」' && line[i + 1] !== '』' && line[i + 1] !== '。') {
+      html  += ch + `<span class="mark-space" title="！？後スペース追加">　</span>`;
+      plain += ch + '　';
+      i++;
+      continue;
+    }
+    const escaped = ch.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html  += escaped;
+    plain += ch;
+    i++;
+  }
+
+  return { html, plain };
+}
+
+let formattedPlain = '';
+
+function format() {
+  const input = document.getElementById('input').value;
+  if (!input.trim()) {
+    document.getElementById('output').innerHTML = '<span style="color:var(--text3);font-size:13px;">テキストを入力してください</span>';
+    return;
+  }
+  const lines = input.split('\n');
+  let htmlOut  = '';
+  let plainOut = '';
+
+  for (let idx = 0; idx < lines.length; idx++) {
+    const { html, plain, isBlank } = processLine(lines[idx]);
+    if (isBlank) {
+      htmlOut  += idx < lines.length - 1 ? '\n' : '';
+      plainOut += idx < lines.length - 1 ? '\n' : '';
+    } else {
+      htmlOut  += (html  || '') + (idx < lines.length - 1 ? '\n' : '');
+      plainOut += (plain || '') + (idx < lines.length - 1 ? '\n' : '');
+    }
+  }
+
+  formattedPlain = plainOut;
+  document.getElementById('output').innerHTML = htmlOut;
+}
+
+function copyText() {
+  if (!formattedPlain) return;
+  navigator.clipboard.writeText(formattedPlain).then(() => {
+    const msg = document.getElementById('copy-msg');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 2000);
+  });
+}
+
+function clearInput() {
+  document.getElementById('input').value = '';
+  document.getElementById('output').innerHTML = '<span style="color:var(--text3);font-size:13px;">「整形する」ボタンを押すと結果が表示されます</span>';
+  formattedPlain = '';
+}
+
+document.getElementById('input').addEventListener('keydown', function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') format();
+});
+</script>
+</body>
+</html>
