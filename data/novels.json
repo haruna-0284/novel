@@ -477,7 +477,7 @@
     "id": "novel-80",
     "title": "引いて、足されて",
     "publishedDate": "2026-08-01",
-    "length": 878
+    "length": 1151
   },
   {
     "id": "novel-81",
@@ -495,7 +495,7 @@
     "id": "novel-83",
     "title": "俺と兄",
     "publishedDate": "2026-07-31",
-    "length": 1707
+    "length": 2800
   },
   {
     "id": "novel-84",
@@ -508,5 +508,17 @@
     "title": "俺とスズメとばあちゃんと",
     "publishedDate": "2026-08-04",
     "length": 1642
+  },
+  {
+    "id": "novel-86",
+    "title": "隣りの家の子",
+    "publishedDate": "2026-08-06",
+    "length": 2399
+  },
+  {
+    "id": "novel-87",
+    "title": "蛍を連れて",
+    "publishedDate": "2026-08-06",
+    "length": 1211
   }
 ]
