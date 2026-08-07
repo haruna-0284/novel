@@ -5,6 +5,7 @@
   const titleEl = document.getElementById("novelTitle");
   const metaEl = document.getElementById("novelMeta");
   const articleEl = document.getElementById("novelArticle");
+  const wandoroLinkContainer = document.getElementById("wandoroLinkContainer");
   const themeReveal = document.getElementById("themeReveal");
   const themeBtn = document.getElementById("themeBtn");
   const themeChips = document.getElementById("themeChips");
@@ -36,7 +37,22 @@
     ];
     if (novel.createdDate) metaParts.push(`<span class="stamp-date-sub">作成 ${fmt(novel.createdDate)}</span>`);
     if (novel.modifiedDate) metaParts.push(`<span class="stamp-date-sub">修正 ${fmt(novel.modifiedDate)}</span>`);
+    if (novel.isWandoro) metaParts.push('<span class="wandoro-badge wandoro-badge--only">ワンドロ版（1時間執筆）</span>');
     metaEl.innerHTML = metaParts.join(" ");
+
+    if (novel.wandoroId) {
+      wandoroLinkContainer.innerHTML = `
+        <div class="wandoro-link-box to-wandoro">
+          <p>この作品には、1時間で書いたワンドロ版もあります。</p>
+          <a class="wandoro-link-btn" href="novel.html?id=${encodeURIComponent(novel.wandoroId)}">→ ワンドロ版を読む</a>
+        </div>`;
+    } else if (novel.revisedId) {
+      wandoroLinkContainer.innerHTML = `
+        <div class="wandoro-link-box to-revised">
+          <p>この作品には、加筆修正した完成版もあります。</p>
+          <a class="wandoro-link-btn" href="novel.html?id=${encodeURIComponent(novel.revisedId)}">→ 修正版を読む</a>
+        </div>`;
+    }
 
     const body = Array.isArray(novel.body) ? novel.body : [];
     articleEl.innerHTML = body

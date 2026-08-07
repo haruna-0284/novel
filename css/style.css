@@ -145,6 +145,48 @@ button, select, input, textarea {
   color: var(--brown);
 }
 
+.controls-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+.filter-btn.has {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.filter-btn.has[aria-pressed="true"] {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.filter-btn.only {
+  border-color: var(--red);
+  color: var(--red);
+}
+.filter-btn.only[aria-pressed="true"] {
+  background: var(--red);
+  color: var(--paper);
+}
+
 /* ---------- 一覧グリッド ---------- */
 
 .novel-grid {
@@ -177,6 +219,43 @@ button, select, input, textarea {
   transform: translate(1px, 1px);
   box-shadow: 3px 3px 0 var(--ink);
 }
+
+/* ワンドロ版あり（修正版＋ワンドロ版のペア）: 青枠 */
+.novel-card.has-wandoro {
+  border-color: var(--blue);
+  box-shadow: 6px 6px 0 var(--blue);
+}
+.novel-card.has-wandoro:hover,
+.novel-card.has-wandoro:focus-visible {
+  box-shadow: 9px 9px 0 var(--blue);
+}
+.novel-card.has-wandoro:active {
+  box-shadow: 3px 3px 0 var(--blue);
+}
+
+/* ワンドロ版のみ（修正版なし）: 赤枠 */
+.novel-card.wandoro-only {
+  border-color: var(--red);
+  box-shadow: 6px 6px 0 var(--red);
+}
+.novel-card.wandoro-only:hover,
+.novel-card.wandoro-only:focus-visible {
+  box-shadow: 9px 9px 0 var(--red);
+}
+.novel-card.wandoro-only:active {
+  box-shadow: 3px 3px 0 var(--red);
+}
+
+.wandoro-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border: 2px solid currentColor;
+  display: inline-block;
+}
+.wandoro-badge--has { color: var(--blue); }
+.wandoro-badge--only { color: var(--red); }
 
 .novel-card h2 {
   margin: 0;
@@ -314,6 +393,50 @@ button, select, input, textarea {
   flex-wrap: wrap;
   align-items: center;
 }
+
+.novel-meta-row .wandoro-badge--only {
+  transform: rotate(-2deg);
+}
+
+.wandoro-link-box {
+  max-width: 38em;
+  margin: 0 auto;
+  padding: 1.2rem 1.5rem;
+  border-top: 2px dashed var(--brown);
+  border-bottom: 2px dashed var(--brown);
+  text-align: center;
+}
+
+.wandoro-link-box p {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--brown);
+}
+
+.wandoro-link-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  padding: 0.6rem 1.3rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.wandoro-link-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.wandoro-link-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* リンクの向きで枠色を変える：ワンドロ版へ進む＝青／修正版へ戻る＝赤 */
+.wandoro-link-box.to-wandoro .wandoro-link-btn { border-color: var(--blue); color: var(--blue); }
+.wandoro-link-box.to-revised .wandoro-link-btn { border-color: var(--red); color: var(--red); }
 
 .novel-article {
   max-width: 38em;

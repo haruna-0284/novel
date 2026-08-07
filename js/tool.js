@@ -15,11 +15,18 @@
     }[c]));
   }
 
-  function buildIdFromNumber(numStr) {
+  function buildIdFromNumber(numStr, suffix) {
     const num = parseInt(numStr, 10);
     if (!numStr || isNaN(num) || num < 1) return null;
-    return `novel-${String(num).padStart(2, "0")}`;
+    return `novel-${String(num).padStart(2, "0")}${suffix || ""}`;
   }
+
+  const TYPE_HINTS = {
+    "normal": "通常の作品として登録します。",
+    "revised-with-wandoro": "IDは通常通りです。対応するワンドロ版のIDは自動的に「(このID)w」になります（そちらは種別「ワンドロ版（修正版とペア）」で別途作成してください）。",
+    "wandoro-only": "ワンドロ版のみの作品として、一覧にそのまま表示されます（枠が赤くなります）。",
+    "wandoro-paired": "IDの末尾に自動で「w」が付きます。一覧には表示されず、対になる修正版のページからのみ遷移できます。修正版と同じ連番を入力してください。"
+  };
 
   function validateAndBuildParagraphs(raw) {
     const lines = raw.split(/\r?\n/);
@@ -100,9 +107,11 @@
   }
 
   document.getElementById("processBtn").addEventListener("click", () => {
+    const type = getFieldValue("typeSelect") || "normal";
     const title = getFieldValue("titleInput").trim();
     const idNumberRaw = getFieldValue("idNumberInput").trim();
-    const id = buildIdFromNumber(idNumberRaw);
+    const idSuffix = type === "wandoro-paired" ? "w" : "";
+    const id = buildIdFromNumber(idNumberRaw, idSuffix);
     const createdDate = getFieldValue("createdDateInput");
     const publishedDate = getFieldValue("publishedDateInput");
     const modifiedDate = getFieldValue("modifiedDateInput");
@@ -144,11 +153,38 @@
     if (themes.length > 0) detail.themes = themes;
     detail.body = paragraphs;
 
-    const listSnippet = { id, title, publishedDate, length };
+    let listSnippet = null;
+
+    if (type === "revised-with-wandoro") {
+      const wandoroId = buildIdFromNumber(idNumberRaw, "w");
+      detail.wandoroId = wandoroId;
+      listSnippet = { id, title, publishedDate, length, wandoroId };
+    } else if (type === "wandoro-only") {
+      detail.isWandoro = true;
+      listSnippet = { id, title, publishedDate, length, isWandoroOnly: true };
+    } else if (type === "wandoro-paired") {
+      const revisedId = buildIdFromNumber(idNumberRaw, "");
+      detail.isWandoro = true;
+      detail.revisedId = revisedId;
+      listSnippet = null; // 一覧には追加しない
+    } else {
+      listSnippet = { id, title, publishedDate, length };
+    }
 
     document.getElementById("lengthDisplay").textContent = `${length.toLocaleString()}字`;
     document.getElementById("detailJsonOutput").value = JSON.stringify(detail, null, 2);
-    document.getElementById("listSnippetOutput").value = JSON.stringify(listSnippet, null, 2);
+
+    const listSnippetBlock = document.getElementById("listSnippetBlock");
+    const noListSnippetNote = document.getElementById("noListSnippetNote");
+    if (listSnippet) {
+      listSnippetBlock.hidden = false;
+      noListSnippetNote.hidden = true;
+      document.getElementById("listSnippetOutput").value = JSON.stringify(listSnippet, null, 2);
+    } else {
+      listSnippetBlock.hidden = true;
+      noListSnippetNote.hidden = false;
+    }
+
     resultSection.hidden = false;
 
     document.getElementById("downloadDetailBtn").onclick = () => {
@@ -168,10 +204,22 @@
 
   const idNumberInput = document.getElementById("idNumberInput");
   const idPreview = document.getElementById("idPreview");
-  if (idNumberInput && idPreview) {
-    idNumberInput.addEventListener("input", () => {
-      const built = buildIdFromNumber(idNumberInput.value.trim());
-      idPreview.textContent = built || "novel-01";
+  const typeSelect = document.getElementById("typeSelect");
+  const typeHint = document.getElementById("typeHint");
+
+  function updateIdPreview() {
+    if (!idNumberInput || !idPreview || !typeSelect) return;
+    const suffix = typeSelect.value === "wandoro-paired" ? "w" : "";
+    const built = buildIdFromNumber(idNumberInput.value.trim(), suffix);
+    idPreview.textContent = built || `novel-01${suffix}`;
+  }
+
+  if (idNumberInput) idNumberInput.addEventListener("input", updateIdPreview);
+  if (typeSelect) {
+    typeSelect.addEventListener("change", () => {
+      updateIdPreview();
+      if (typeHint) typeHint.textContent = TYPE_HINTS[typeSelect.value] || "";
     });
+    updateIdPreview();
   }
 })();

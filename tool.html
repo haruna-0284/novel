@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -23,6 +23,19 @@
   <p class="tool-notice">
     このページは公開ページからはリンクしていません（noindex設定済み）。本文を貼り付けて変換すると、<code>data/novels/{ID}.json</code> 用の詳細データと、<code>data/novels.json</code> に追加する一覧用スニペットを生成します。生成後は自分でファイルを保存・コミットしてください。
   </p>
+
+  <div class="field-row">
+    <div class="field" style="grid-column: 1 / -1;">
+      <label for="typeSelect">種別</label>
+      <select id="typeSelect" class="sort-select" style="width:100%;">
+        <option value="normal">通常</option>
+        <option value="revised-with-wandoro">修正版（ワンドロ版あり）</option>
+        <option value="wandoro-only">ワンドロ版のみ（一覧にそのまま表示）</option>
+        <option value="wandoro-paired">ワンドロ版（修正版とペア／一覧には表示しない）</option>
+      </select>
+      <span class="field-hint" id="typeHint">通常の作品として登録します。</span>
+    </div>
+  </div>
 
   <div class="field-row">
     <div class="field">
@@ -86,16 +99,20 @@
       </div>
     </div>
 
-    <div class="output-block">
+    <div class="output-block" id="listSnippetBlock">
       <h3>一覧用スニペット（data/novels.json の配列に追加）</h3>
       <textarea id="listSnippetOutput" readonly></textarea>
       <div class="output-actions">
         <button class="secondary-btn" id="copySnippetBtn" type="button">コピーする</button>
       </div>
     </div>
+
+    <p class="tool-notice" id="noListSnippetNote" hidden>
+      このワンドロ版は <code>data/novels.json</code>（一覧）には追加しないでください。対応する修正版のページから自動的にリンクされます。
+    </p>
   </div>
 </main>
 
-<script src="js/tool.js?v=4"></script>
+<script src="js/tool.js?v=5"></script>
 </body>
 </html>

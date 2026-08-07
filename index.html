@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -18,14 +18,20 @@
 </header>
 
 <div class="controls-bar">
-  <div>
-    <label for="sortSelect">並び替え</label>
-    <select id="sortSelect" class="sort-select">
-      <option value="date-desc">公開日：新しい順</option>
-      <option value="date-asc">公開日：古い順</option>
-      <option value="length-desc">文字数：長い順</option>
-      <option value="length-asc">文字数：短い順</option>
-    </select>
+  <div class="controls-left">
+    <div>
+      <label for="sortSelect">並び替え</label>
+      <select id="sortSelect" class="sort-select">
+        <option value="date-desc">公開日：新しい順</option>
+        <option value="date-asc">公開日：古い順</option>
+        <option value="length-desc">文字数：長い順</option>
+        <option value="length-asc">文字数：短い順</option>
+      </select>
+    </div>
+    <div class="filter-group" role="group" aria-label="ワンドロ版の絞り込み">
+      <button type="button" class="filter-btn has" id="filterHasWandoro" aria-pressed="false">ワンドロ版あり</button>
+      <button type="button" class="filter-btn only" id="filterWandoroOnly" aria-pressed="false">ワンドロ版のみ</button>
+    </div>
   </div>
   <div class="result-count" id="resultCount"></div>
 </div>
@@ -41,6 +47,6 @@
   &copy; <span id="yearSpan"></span> ナマケモノ文庫
 </footer>
 
-<script src="js/list.js?v=3"></script>
+<script src="js/list.js?v=4"></script>
 </body>
 </html>

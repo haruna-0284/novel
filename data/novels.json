@@ -520,5 +520,19 @@
     "title": "蛍を連れて",
     "publishedDate": "2026-08-06",
     "length": 1211
+  },
+  {
+    "id": "novel-88",
+    "title": "村はずれの老人",
+    "publishedDate": "2026-08-07",
+    "length": 2032,
+    "isWandoroOnly": true
+  },
+  {
+    "id": "novel-89",
+    "title": "笑顔になって",
+    "publishedDate": "2026-08-07",
+    "length": 1099,
+    "isWandoroOnly": true
   }
 ]
